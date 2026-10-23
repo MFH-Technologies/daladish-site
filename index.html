@@ -66,9 +66,9 @@ p { margin: 0; }
 
 /* header */
 .site-head { border-bottom: 1px solid var(--line); background: var(--bg); }
-.site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; flex-wrap: wrap; }
+.site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; flex-wrap: wrap; }
 .brand { display: inline-flex; align-items: center; min-height: 44px; color: var(--logo); }
-.brand .logo { height: 30px; width: auto; display: block; }
+.brand .logo { height: clamp(32px, 3.6vw, 46px); width: auto; display: block; }
 .logo .steam { fill: var(--accent); }
 .nav { display: flex; gap: 4px; flex-wrap: wrap; }
 .nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 999px; color: var(--text); text-decoration: none; font-weight: 600; font-size: var(--step--1); }
@@ -182,32 +182,29 @@ details > div { padding: 0 18px 16px; display: grid; gap: 10px; color: var(--tex
 </a><nav class="nav" aria-label="Main"><a href="index.html#how">How it works</a><a href="support.html">Support</a></nav></div></header><main id="main">
 <section class="hero"><div class="wrap">
   <div class="hero-copy">
-    <p class="eyebrow">Free family meal planner · South Africa</p>
-    <h1>Your week's meals, planned from <em>your budget</em>.</h1>
-    <p class="lead">Tell DalaDish who you cook for and what you can spend. It plans breakfasts, lunches, suppers and snacks from real supermarket prices, writes one shopping list by aisle, and walks you through every recipe.</p>
+    <h1>Know what's for supper all week, <em>and what it'll cost</em>.</h1>
     <p class="soon"><span class="dot" aria-hidden="true"></span>Coming soon to the App Store and Google Play</p>
   </div>
-  <aside class="slip" aria-label="Example shopping list"><div class="slip-head"><b>Shopping list</b><span>Example, part of a week</span></div><div class="aisle"><h3>Fresh produce</h3><div class="item"><span>Potatoes, 2 kg</span><span class="rand">R49.99</span></div><div class="item"><span>Bananas, 1.2 kg</span><span class="rand">R39.99</span></div></div><div class="aisle"><h3>Meat and fish</h3><div class="item"><span>Chicken pieces, 1.5 kg</span><span class="rand">R89.99</span></div><div class="item"><span>Beef mince, 550 g</span><span class="rand">R60.49</span></div></div><div class="aisle"><h3>Dairy and eggs</h3><div class="item"><span>Full cream milk, 2 L</span><span class="rand">R32.99</span></div><div class="item"><span>Eggs, 30</span><span class="rand">R109.99</span></div></div><div class="aisle"><h3>Food cupboard</h3><div class="item"><span>Super maize meal, 2.5 kg</span><span class="rand">R39.99</span></div><div class="item"><span>Long-grain rice, 2 kg</span><span class="rand">R39.99</span></div></div><div class="total"><span>These 8 items</span><span class="rand">R463.42</span></div><p class="slip-note">Example prices to show how the list works. In the app, every price shows the store and the date it was checked, and the till price always applies.</p></aside>
+  <aside class="slip" aria-label="Example shopping list"><div class="slip-head"><b>Shopping list</b><span>Family of four</span></div><div class="aisle"><h3>Fresh produce</h3><div class="item"><span>Potatoes, 2 kg</span><span class="rand">R49.99</span></div><div class="item"><span>Bananas, 1.2 kg</span><span class="rand">R39.99</span></div></div><div class="aisle"><h3>Meat and fish</h3><div class="item"><span>Chicken pieces, 1.5 kg</span><span class="rand">R89.99</span></div><div class="item"><span>Beef mince, 550 g</span><span class="rand">R60.49</span></div></div><div class="aisle"><h3>Dairy and eggs</h3><div class="item"><span>Full cream milk, 2 L</span><span class="rand">R32.99</span></div><div class="item"><span>Eggs, 30</span><span class="rand">R109.99</span></div></div><div class="aisle"><h3>Food cupboard</h3><div class="item"><span>Super maize meal, 2.5 kg</span><span class="rand">R39.99</span></div><div class="item"><span>Long-grain rice, 2 kg</span><span class="rand">R39.99</span></div></div><div class="total"><span>8 items</span><span class="rand">R463.42</span></div></aside>
 </div></section>
 
 <section class="section" id="how" aria-labelledby="how-h"><div class="wrap">
-  <div class="section-head"><h2 id="how-h">How it works</h2><p>Three steps, and the week is sorted.</p></div>
+  <div class="section-head"><h2 id="how-h">How it works</h2><p>Set it up once. After that, next week's plan is waiting for you on the weekend.</p></div>
   <ol class="steps">
-    <li><h3>Tell us who eats and what you can spend</h3><p>How many adults and children, your budget for the week, any allergies, the foods you'd rather skip, and what's already in the cupboard.</p></li>
-    <li><h3>Get a week of meals that fits</h3><p>Breakfasts, lunches, suppers and snacks, costed against your budget. House brands and specials come in where they save you money, and you can swap any meal you don't fancy.</p></li>
-    <li><h3>Shop one list, cook step by step</h3><p>One list grouped by aisle, minus what you already have. At the stove, follow the recipe one step at a time, with timers where you need them.</p></li>
+    <li><h3>Tell us about your household</h3><p>Who's eating, what you can spend this week, any allergies, and the foods someone at your table simply won't touch.</p></li>
+    <li><h3>Get a plan that fits the money</h3><p>Breakfast, lunch, supper and snacks, added up against your budget. Not in the mood for fish on Thursday? Swap it for something else.</p></li>
+    <li><h3>Shop once, then cook</h3><p>One list, grouped by aisle, without the things you already have. In the kitchen, the recipe goes one step at a time, with a timer for anything that needs to simmer.</p></li>
   </ol>
 </div></section>
 
 <section class="section" aria-labelledby="prep-h"><div class="wrap occasion">
   <div class="occasion-copy">
-    <h2 id="prep-h">Prep a meal for the day that matters</h2>
-    <p>Sunday lunch, a braai, a birthday or the year-end function. Say how many are coming and what you want to spend, and DalaDish puts together the menu with the salads, a dessert and the drinks, then the shopping list and a timeline for the day.</p>
+    <h2 id="prep-h">Having people over?</h2>
+    <p>Sunday lunch with the family, a braai for half the street, a child's birthday. Tell DalaDish how many are coming and what you want to spend. It plans the menu, salads, pudding and drinks included, writes the shopping list, and reminds you what to do the day before.</p>
     <ul class="chips" aria-label="Occasions"><li>Sunday lunch</li><li>Braai</li><li>Birthday</li><li>Year-end function</li><li>Christmas lunch</li><li>Kids' party</li></ul>
-    <p>Drinks with alcohol appear only for adults, after a date-of-birth check, and only if you switch them on.</p>
   </div>
   <div class="menu" aria-label="Example braai menu">
-    <div class="menu-head"><b>A braai for 14</b><span>Example: 10 adults, 4 kids, budget R1 500</span></div>
+    <div class="menu-head"><b>A braai for 14</b><span>10 adults, 4 kids, R1 500</span></div>
     <dl>
       <dt>Mains</dt><dd>Boerewors and lamb chops</dd>
       <dt>Sides</dt><dd>Pap and chakalaka, braaibroodjies</dd>
@@ -220,16 +217,17 @@ details > div { padding: 0 18px 16px; display: grid; gap: 10px; color: var(--tex
 </div></section>
 
 <section class="section" aria-labelledby="real-h"><div class="wrap">
-  <div class="section-head"><h2 id="real-h">Made for real kitchens</h2></div>
+  <div class="section-head"><h2 id="real-h">A few things we were careful about</h2></div>
   <div class="points">
-    <div><h3>Allergies come first</h3><p>Choose from 12 common allergens and any foods you'd rather not eat. DalaDish leaves out the recipes and products that contain them. Always check the label too.</p></div>
-    <div><h3>It knows your cupboard</h3><p>Tick the oil, spices and staples you already have, and they stay off the list. You only pay for what the week actually uses.</p></div>
-    <div><h3>Free, with no paywall</h3><p>Planning, the list, the recipes and Prep a meal are all free. Your information plans your meals and is never sold or used for ads.</p></div>
+    <div><h3>Allergies</h3><p>Pick from 12 common allergens, plus anything you just don't eat, and those recipes and products stay out of your plan. Please still read the label, because manufacturers change their recipes.</p></div>
+    <div><h3>What's already in the cupboard</h3><p>Tick the oil, salt and spices you already have, and they stay off your list. No more third bottle of oil at the back of the cupboard.</p></div>
+    <div><h3>Free, and no ads</h3><p>Planning, the shopping list, the recipes and the meals for when people come over all cost nothing. We don't sell your information, and we don't show you ads.</p></div>
   </div>
 </div></section>
 
 <section class="cta" aria-labelledby="soon-h"><div class="wrap">
-  <h2 id="soon-h">Coming soon to the App Store and Google Play</h2>
+  <h2 id="soon-h">Got a question or an idea?</h2>
+  <p>Send us an email. We read every one and usually reply within two working days.</p>
   <div class="copyline"><span class="addr" id="mail-hello">hello@daladish.co.za</span><button class="copy-btn" type="button" data-copy="hello@daladish.co.za" aria-controls="mail-hello">Copy address</button></div>
 </div></section>
 </main><footer class="site-foot"><div class="wrap"><nav class="foot-links" aria-label="All pages"><a href="index.html">Home</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="paia.html">PAIA manual</a><a href="delete-account.html">Delete account</a></nav><p class="legal-line">DalaDish is a product of MFH Technologies (Pty) Ltd · Reg. No. 2026/583234/07 · 874 Odell Street, Wingate Park, Gauteng 0181 · <a href="tel:+27670157701">+27 67 015 7701</a> · Director: SJ Pieterse · Information Officer registration 2026-069384</p></div></footer><script>
