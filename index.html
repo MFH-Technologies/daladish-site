@@ -138,6 +138,7 @@ details > div p { color: var(--muted); }
 @media (min-width: 900px) { .hero-copy { padding-bottom: 120px; } }
 .hero h1 { color: var(--on-band); max-width: 12ch; }
 .hero h1 em { font-style: normal; color: var(--accent); }
+.hero-lede { color: var(--on-band-soft); font-size: var(--step-1); line-height: 1.5; max-width: 30rem; margin-top: -8px; }
 .hero .lead { font-size: var(--step-1); line-height: 1.5; color: var(--on-band-soft); max-width: 30rem; }
 .soon { display: inline-flex; align-items: center; gap: 10px; justify-self: start; min-height: 44px; padding: 8px 18px; border-radius: 999px; background: rgba(251, 248, 242, .1); border: 1px solid rgba(251, 248, 242, .22); font-weight: 600; font-size: var(--step--1); }
 .soon .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; box-shadow: 0 0 0 4px rgba(227, 167, 47, .2); }
@@ -209,12 +210,12 @@ details > div p { color: var(--muted); }
 .story { padding-top: 184px; }
 @media (max-width: 899px) { .story { padding-top: 168px; } }
 .kicker-h { max-width: 16ch; }
-.story-grid { display: grid; gap: 32px; margin-top: 40px; align-items: center; }
+.story-grid { display: grid; gap: 32px; align-items: center; }
 @media (min-width: 900px) { .story-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 64px; margin-top: 56px; } }
 .photo { border-radius: 22px; overflow: hidden; box-shadow: var(--shadow-md); background: var(--sunk); }
 .photo img { width: 100%; height: 100%; object-fit: cover; }
 .story-copy { display: grid; gap: 20px; }
-.big-p { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem); line-height: 1.25; font-weight: 700; letter-spacing: -0.02em; }
+.big-p { font-size: var(--step-1); line-height: 1.5; color: var(--muted); max-width: 30rem; }
 .muted { color: var(--muted); }
 
 .app { background: var(--sunk); }
@@ -224,7 +225,7 @@ details > div p { color: var(--muted); }
 .app-intro { grid-area: intro; display: grid; gap: 20px; align-self: end; }
 .app-intro > p { font-size: var(--step-1); color: var(--muted); max-width: 34rem; line-height: 1.5; }
 .facts-list { grid-area: facts; list-style: none; margin: 0; padding: 0; display: grid; align-content: start; }
-.facts-list li { padding: 20px 0; border-top: 1px solid var(--line); }
+.facts-list li { display: grid; gap: 4px; padding: 20px 0; border-top: 1px solid var(--line); }
 .facts-list li:last-child { border-bottom: 1px solid var(--line); }
 .facts-list h3 { font-size: var(--step-1); }
 .facts-list p { color: var(--muted); }
@@ -293,6 +294,7 @@ details > div p { color: var(--muted); }
 <section class="hero"><div class="wrap">
   <div class="hero-copy">
     <h1>Know what's for supper all week, <em>and what it'll cost</em>.</h1>
+    <p class="hero-lede">A meal planner for South African families. It plans the week, prices every meal at your store and writes one shopping list.</p>
     <p class="soon"><span class="dot" aria-hidden="true"></span>Coming to the App Store and Google Play</p>
   </div>
   <div class="hero-phone">
@@ -323,11 +325,11 @@ details > div p { color: var(--muted); }
 </div></section>
 
 <section class="section story" aria-labelledby="story-h"><div class="wrap">
-  <h2 id="story-h" class="kicker-h">Every week starts with the same sum.</h2>
   <div class="story-grid">
     <div class="photo" style="aspect-ratio: 4 / 3"><img src="assets/photos/d_potjie.jpg" alt="A chicken potjie simmering over the coals" width="600" height="450" loading="lazy"></div>
     <div class="story-copy">
-      <p class="big-p">DalaDish builds the week around it.</p>
+      <h2 id="story-h" class="kicker-h">Every week starts with the same sum.</h2>
+      <p class="big-p">Whatever there is for food this week, that's where DalaDish starts. The meals are chosen to fit the money, not the other way round.</p>
     </div>
   </div>
 </div></section>
@@ -367,11 +369,11 @@ details > div p { color: var(--muted); }
     <h2 id="how-h">Every meal comes with a price.</h2>
   </div>
     <ul class="facts-list">
-      <li><h3>Priced as you plan</h3></li>
-      <li><h3>One list, by aisle</h3></li>
-      <li><h3>Next week, ready on Saturday</h3></li>
-      <li><h3>Step by step at the stove</h3></li>
-      <li><h3>One plan for the household</h3></li>
+      <li><h3>Priced as you plan</h3><p>Swap Thursday's supper and the week's total changes with it.</p></li>
+      <li><h3>One list, by aisle</h3><p>Without the oil and spices already in your cupboard.</p></li>
+      <li><h3>Next week, ready on Saturday</h3><p>In time for the weekend shop.</p></li>
+      <li><h3>Step by step at the stove</h3><p>With a timer for anything that has to simmer.</p></li>
+      <li><h3>One plan for the household</h3><p>Your partner joins with a family code, on their own phone.</p></li>
     </ul>
 </div></section>
 
@@ -391,6 +393,7 @@ details > div p { color: var(--muted); }
 <section class="section" aria-labelledby="prep-h" style="padding-top:24px"><div class="wrap occasion">
   <div class="occasion-copy">
     <h2 id="prep-h">Having people over?</h2>
+    <p>Say how many are coming and what you want to spend. DalaDish plans the menu, writes the list and tells you what to do the day before.</p>
     <ul class="chips" aria-label="Occasions"><li>Sunday lunch</li><li>Braai</li><li>Birthday</li><li>Year-end function</li><li>Christmas lunch</li><li>Kids' party</li></ul>
   </div>
   <div class="occasion-art">
@@ -413,6 +416,7 @@ details > div p { color: var(--muted); }
   <div class="next-copy">
     <span class="tag">Coming next</span>
     <h2 id="next-h">From your list straight to your online basket.</h2>
+    <p>Today each item opens on the store's website. Next, the whole list goes into your online basket in one tap, wherever the store allows it.</p>
   </div>
   <div class="basket" role="img" aria-label="A shopping list of 33 items at R1 278.63, with a button to send it to an online basket. This is coming next.">
     <div class="top"><b>Shopping list</b><span>33 items · R1 278.63</span></div>
@@ -429,11 +433,12 @@ details > div p { color: var(--muted); }
 
 <section class="section promise" aria-labelledby="promise-h"><div class="wrap">
   <h2 id="promise-h">Free, no ads, and we never sell your information.</h2>
+  <p>Your information plans your meals. That's all it's used for.</p>
 </div></section>
 
 <section class="contact" aria-labelledby="contact-h"><div class="wrap">
   <div class="contact-card">
-    <div><h2 id="contact-h">Questions, or an idea for DalaDish?</h2></div>
+    <div><h2 id="contact-h">Questions, or an idea for DalaDish?</h2><p>We usually reply within two working days.</p></div>
     <div class="copyline"><span class="addr" id="mail-hello">hello@daladish.co.za</span><button class="copy-btn" type="button" data-copy="hello@daladish.co.za" aria-controls="mail-hello">Copy address</button></div>
   </div>
 </div></section>
