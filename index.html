@@ -214,7 +214,7 @@ details > div p { color: var(--muted); }
 .photo { border-radius: 22px; overflow: hidden; box-shadow: var(--shadow-md); background: var(--sunk); }
 .photo img { width: 100%; height: 100%; object-fit: cover; }
 .story-copy { display: grid; gap: 20px; }
-.big-p { font-size: clamp(1.2rem, 1.05rem + .6vw, 1.45rem); line-height: 1.5; font-weight: 500; letter-spacing: -0.01em; }
+.big-p { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem); line-height: 1.25; font-weight: 700; letter-spacing: -0.02em; }
 .muted { color: var(--muted); }
 
 .app { background: var(--sunk); }
@@ -224,10 +224,9 @@ details > div p { color: var(--muted); }
 .app-intro { grid-area: intro; display: grid; gap: 20px; align-self: end; }
 .app-intro > p { font-size: var(--step-1); color: var(--muted); max-width: 34rem; line-height: 1.5; }
 .facts-list { grid-area: facts; list-style: none; margin: 0; padding: 0; display: grid; align-content: start; }
-.facts-list li { display: grid; gap: 6px; padding: 22px 0; border-top: 1px solid var(--line); }
-@media (min-width: 640px) { .facts-list li { grid-template-columns: 13rem 1fr; gap: 24px; } }
+.facts-list li { padding: 20px 0; border-top: 1px solid var(--line); }
 .facts-list li:last-child { border-bottom: 1px solid var(--line); }
-.facts-list h3 { font-size: 1.0625rem; }
+.facts-list h3 { font-size: var(--step-1); }
 .facts-list p { color: var(--muted); }
 
 .food-head { display: flex; justify-content: space-between; align-items: end; gap: 16px 40px; flex-wrap: wrap; }
@@ -328,8 +327,7 @@ details > div p { color: var(--muted); }
   <div class="story-grid">
     <div class="photo" style="aspect-ratio: 4 / 3"><img src="assets/photos/d_potjie.jpg" alt="A chicken potjie simmering over the coals" width="600" height="450" loading="lazy"></div>
     <div class="story-copy">
-      <p class="big-p">There's an amount you can spend on food this week. Prices move from one week to the next, month-end comes around regardless, and every evening someone asks what's for supper.</p>
-      <p class="muted">DalaDish starts with that amount. It plans breakfast, lunch and supper for everyone at your table, prices every ingredient at the store you shop at, and builds the week to fit your budget.</p>
+      <p class="big-p">DalaDish builds the week around it.</p>
     </div>
   </div>
 </div></section>
@@ -367,21 +365,19 @@ details > div p { color: var(--muted); }
   </div>
   <div class="app-intro">
     <h2 id="how-h">Every meal comes with a price.</h2>
-    <p>You see what the week will cost before you set foot in a shop, and you see the total change when you change the plan.</p>
   </div>
     <ul class="facts-list">
-      <li><h3>Priced as you plan</h3><p>Each meal shows what it costs and what that comes to per plate. Swap Thursday's supper and the week's total moves with it.</p></li>
-      <li><h3>One list, by aisle</h3><p>Everything the week needs in one list, without the oil and spices already in your cupboard. Tick things off as they go into the trolley.</p></li>
-      <li><h3>Next week, ready on Saturday</h3><p>Over the weekend, next week's plan is waiting. Change what you like, then shop.</p></li>
-      <li><h3>Step by step at the stove</h3><p>Recipes one step at a time, with a timer for anything that has to simmer.</p></li>
-      <li><h3>One plan for the household</h3><p>Share a family code with your partner, and you plan, shop and cook from the same week on two phones.</p></li>
+      <li><h3>Priced as you plan</h3></li>
+      <li><h3>One list, by aisle</h3></li>
+      <li><h3>Next week, ready on Saturday</h3></li>
+      <li><h3>Step by step at the stove</h3></li>
+      <li><h3>One plan for the household</h3></li>
     </ul>
 </div></section>
 
 <section class="section" aria-labelledby="food-h"><div class="wrap">
   <div class="food-head">
     <h2 id="food-h">Nearly 300 everyday dishes.</h2>
-    <p>From pap and wors to bobotie, mutton curry and a Sunday roast. Each one costed for your household.</p>
   </div>
   <div class="strip" role="list">
     <figure role="listitem"><div class="photo"><img src="assets/photos/bobotie.jpg" alt="Bobotie with yellow rice and chutney" width="600" height="450" loading="lazy"></div><figcaption>Bobotie and yellow rice</figcaption></figure>
@@ -395,7 +391,6 @@ details > div p { color: var(--muted); }
 <section class="section" aria-labelledby="prep-h" style="padding-top:24px"><div class="wrap occasion">
   <div class="occasion-copy">
     <h2 id="prep-h">Having people over?</h2>
-    <p>Sunday lunch with the family, a braai for half the street, a child's birthday. Tell DalaDish how many are coming and what you want to spend. It plans the menu, salads, pudding and drinks included, writes the shopping list, and reminds you what to do the day before.</p>
     <ul class="chips" aria-label="Occasions"><li>Sunday lunch</li><li>Braai</li><li>Birthday</li><li>Year-end function</li><li>Christmas lunch</li><li>Kids' party</li></ul>
   </div>
   <div class="occasion-art">
@@ -418,8 +413,6 @@ details > div p { color: var(--muted); }
   <div class="next-copy">
     <span class="tag">Coming next</span>
     <h2 id="next-h">From your list straight to your online basket.</h2>
-    <p>Today, DalaDish opens each item on the store's website and you add it to your basket there. Next, one tap will send the whole list to your online basket, wherever the store supports it.</p>
-    <p>You still shop and pay with the store as usual. DalaDish never sees your login or your card.</p>
   </div>
   <div class="basket" role="img" aria-label="A shopping list of 33 items at R1 278.63, with a button to send it to an online basket. This is coming next.">
     <div class="top"><b>Shopping list</b><span>33 items · R1 278.63</span></div>
@@ -436,12 +429,11 @@ details > div p { color: var(--muted); }
 
 <section class="section promise" aria-labelledby="promise-h"><div class="wrap">
   <h2 id="promise-h">Free, no ads, and we never sell your information.</h2>
-  <p>Allergies you choose stay out of every plan. Please still check the label.</p>
 </div></section>
 
 <section class="contact" aria-labelledby="contact-h"><div class="wrap">
   <div class="contact-card">
-    <div><h2 id="contact-h">Questions, or an idea for DalaDish?</h2><p>Email us. We read every message and usually reply within two working days.</p></div>
+    <div><h2 id="contact-h">Questions, or an idea for DalaDish?</h2></div>
     <div class="copyline"><span class="addr" id="mail-hello">hello@daladish.co.za</span><button class="copy-btn" type="button" data-copy="hello@daladish.co.za" aria-controls="mail-hello">Copy address</button></div>
   </div>
 </div></section>
