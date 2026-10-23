@@ -5,19 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>DalaDish</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="DalaDish is a free South African family meal planner that starts from your weekly budget, plans every meal from real supermarket prices and writes one shopping list by aisle.">
+<meta name="description" content="DalaDish plans your family's meals from your weekly budget, prices every ingredient at the store you shop at, and gives you one shopping list sorted by aisle.">
 <meta name="theme-color" content="#1E4737">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/daladish_appicon_green_180.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"><style>
-/* Layout: one column on phones. The home page opens on a green band with the
-   lock-up and a cream shopping-list slip; every other page is a 65ch reading
-   column. Tokens follow the DalaDish CI v2.0: green, cream and mustard, Inter. */
+/* Shared by every page. Tokens follow the DalaDish CI v2.0: green, cream and
+   mustard, set in Inter. The home page opens on the green band; the other
+   pages are a reading column on cream. */
 :root {
   --bg: #FBF8F2;          /* cream ground */
-  --surface: #FFFFFF;     /* the list slip, FAQ answers */
+  --surface: #FFFFFF;
+  --sunk: #F3EEE3;        /* quiet panels */
   --text: #15231C;        /* green-black ink */
   --muted: #55635A;
   --line: #E4DED0;
   --band: #1E4737;        /* DalaDish green */
+  --band-deep: #163A2C;
   --on-band: #FBF8F2;
   --on-band-soft: #C3D2C7;
   --accent: #E3A72F;      /* mustard, the steam */
@@ -25,130 +27,80 @@
   --accent-ink: #5E430C;
   --link: #1E4737;
   --logo: #1E4737;
-  --slip-shadow: 0 1px 2px rgba(21, 35, 28, .08), 0 12px 32px -12px rgba(21, 35, 28, .28);
+  --shadow-lg: 0 2px 4px rgba(21, 35, 28, .06), 0 24px 60px -18px rgba(21, 35, 28, .38);
+  --shadow-md: 0 1px 2px rgba(21, 35, 28, .06), 0 10px 28px -12px rgba(21, 35, 28, .25);
   --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --step--1: 0.875rem; --step-0: 1.0625rem; --step-1: 1.25rem; --step-2: 1.6rem; --step-3: clamp(2rem, 1.4rem + 3vw, 3.25rem);
+  --step--1: 0.9rem; --step-0: 1.0625rem; --step-1: 1.25rem; --step-2: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --step-3: clamp(2.1rem, 1.4rem + 2.8vw, 3.6rem); --step-4: clamp(2.6rem, 1.5rem + 4.6vw, 5rem);
   --gutter-l: max(16px, env(safe-area-inset-left, 0px));
   --gutter-r: max(16px, env(safe-area-inset-right, 0px));
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0F1C16; --surface: #16271F; --text: #F1EDE4; --muted: #A9B7AE; --line: #2A3D33;
-    --band: #1E4737; --on-band: #FBF8F2; --on-band-soft: #C3D2C7;
+    --bg: #0F1C16; --surface: #16271F; --sunk: #13231B; --text: #F1EDE4; --muted: #A9B7AE; --line: #2A3D33;
+    --band: #1E4737; --band-deep: #163A2C; --on-band: #FBF8F2; --on-band-soft: #C3D2C7;
     --accent: #E3A72F; --accent-tint: #3B3019; --accent-ink: #F2D18A; --link: #EBC56E; --logo: #FBF8F2;
-    --slip-shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px -12px rgba(0, 0, 0, .7);
+    --shadow-lg: 0 2px 4px rgba(0, 0, 0, .4), 0 24px 60px -18px rgba(0, 0, 0, .8);
+    --shadow-md: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px -12px rgba(0, 0, 0, .7);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0F1C16; --surface: #16271F; --text: #F1EDE4; --muted: #A9B7AE; --line: #2A3D33;
-  --band: #1E4737; --on-band: #FBF8F2; --on-band-soft: #C3D2C7;
+  --bg: #0F1C16; --surface: #16271F; --sunk: #13231B; --text: #F1EDE4; --muted: #A9B7AE; --line: #2A3D33;
+  --band: #1E4737; --band-deep: #163A2C; --on-band: #FBF8F2; --on-band-soft: #C3D2C7;
   --accent: #E3A72F; --accent-tint: #3B3019; --accent-ink: #F2D18A; --link: #EBC56E; --logo: #FBF8F2;
-  --slip-shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px -12px rgba(0, 0, 0, .7);
+  --shadow-lg: 0 2px 4px rgba(0, 0, 0, .4), 0 24px 60px -18px rgba(0, 0, 0, .8);
+  --shadow-md: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px -12px rgba(0, 0, 0, .7);
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: var(--step-0); line-height: 1.6; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: var(--step-0); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 img, svg { max-width: 100%; }
+img { display: block; height: auto; }
 a { color: var(--link); text-underline-offset: 3px; text-decoration-thickness: 1px; }
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-h1, h2, h3 { line-height: 1.12; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
-h1 { font-size: var(--step-3); font-weight: 800; }
-h2 { font-size: var(--step-2); font-weight: 800; }
-h3 { font-size: var(--step-1); font-weight: 700; }
-p { margin: 0; }
-.wrap { max-width: 68rem; margin: 0 auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
-.read { max-width: 42rem; }
+h1, h2, h3 { line-height: 1.08; letter-spacing: -0.025em; text-wrap: balance; margin: 0; }
+h1 { font-size: var(--step-4); font-weight: 800; }
+h2 { font-size: var(--step-3); font-weight: 800; }
+h3 { font-size: var(--step-1); font-weight: 700; letter-spacing: -0.01em; }
+p { margin: 0; text-wrap: pretty; }
+.wrap { max-width: 74rem; margin: 0 auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
+.read { max-width: 44rem; }
+.wrap.read { max-width: 74rem; }
+.wrap.read > * { max-width: 44rem; }
 .skip { position: absolute; left: -999px; top: 8px; background: var(--surface); color: var(--text); padding: 10px 14px; border-radius: 8px; z-index: 20; }
 .skip:focus { left: 16px; }
 
-/* header */
+/* header: the lock-up is the first thing you see, so it gets room */
 .site-head { border-bottom: 1px solid var(--line); background: var(--bg); }
-.site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; flex-wrap: wrap; }
+.site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px 20px; padding-block: 18px; flex-wrap: wrap; }
 .brand { display: inline-flex; align-items: center; min-height: 44px; color: var(--logo); }
-.brand .logo { height: clamp(32px, 3.6vw, 46px); width: auto; display: block; }
+.brand .logo { height: 40px; width: auto; display: block; }
+@media (min-width: 760px) { .site-head .wrap { padding-block: 26px; } .brand .logo { height: 56px; } }
 .logo .steam { fill: var(--accent); }
-.nav { display: flex; gap: 4px; flex-wrap: wrap; }
-.nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 999px; color: var(--text); text-decoration: none; font-weight: 600; font-size: var(--step--1); }
+.nav { display: flex; gap: 4px; flex-wrap: wrap; margin-right: -12px; }
+.nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; color: var(--text); text-decoration: none; font-weight: 600; font-size: var(--step--1); }
 .nav a:hover, .nav a[aria-current="page"] { background: var(--accent-tint); color: var(--accent-ink); }
 .home .site-head { background: var(--band); border-bottom-color: transparent; }
 .home .site-head .brand { color: var(--on-band); }
 .home .nav a { color: var(--on-band); }
 .home .nav a:hover { background: rgba(251, 248, 242, .12); color: var(--on-band); }
 
-/* hero */
-.hero { background: var(--band); color: var(--on-band); }
-.hero .wrap { display: grid; gap: 40px; padding-block: 40px 56px; align-items: center; }
-@media (min-width: 860px) { .hero .wrap { grid-template-columns: 1.15fr 0.85fr; padding-block: 64px 80px; gap: 56px; } }
-.hero-copy { display: grid; gap: 20px; min-width: 0; }
-.eyebrow { font-size: var(--step--1); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--on-band-soft); }
-.hero .lead { font-size: var(--step-1); line-height: 1.5; color: var(--on-band-soft); max-width: 34rem; }
-.hero h1 { color: var(--on-band); }
-.hero h1 em { font-style: normal; color: var(--accent); }
-.soon { display: inline-flex; align-items: center; gap: 10px; align-self: start; justify-self: start; min-height: 44px; padding: 8px 16px; border-radius: 999px; background: rgba(251, 248, 242, .1); border: 1px solid rgba(251, 248, 242, .22); font-weight: 600; font-size: var(--step--1); }
-.soon .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; }
-
-/* the list slip: an example of the one thing DalaDish hands you, a list by aisle in rand */
-.slip { background: var(--surface); color: var(--text); border-radius: 14px 14px 4px 4px; box-shadow: var(--slip-shadow); padding: 22px 22px 26px; position: relative; min-width: 0; font-size: var(--step--1); }
-.slip::after { content: ""; position: absolute; left: 0; right: 0; bottom: -9px; height: 10px; background: radial-gradient(circle at 6px -2px, transparent 6px, var(--surface) 6.5px) 0 0 / 12px 10px repeat-x; }
-.slip-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 12px; border-bottom: 2px dashed var(--line); flex-wrap: wrap; }
-.slip-head b { font-size: var(--step-0); }
-.slip-head span { color: var(--muted); }
-.aisle { margin-top: 14px; }
-.aisle h3 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-.item { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; }
-.item span:first-child { min-width: 0; }
-.item .rand, .total .rand { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 600; }
-.total { display: flex; justify-content: space-between; gap: 12px; margin-top: 14px; padding-top: 12px; border-top: 2px dashed var(--line); font-weight: 700; }
-.slip-note { margin-top: 10px; color: var(--muted); font-size: 0.8125rem; }
-
-/* sections */
-.section { padding-block: 56px; }
-.section + .section { border-top: 1px solid var(--line); }
-.section-head { display: grid; gap: 10px; max-width: 40rem; margin-bottom: 28px; }
-.section-head p { color: var(--muted); font-size: var(--step-1); line-height: 1.5; }
-.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; counter-reset: step; }
-@media (min-width: 760px) { .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; } }
-.steps li { display: grid; gap: 8px; align-content: start; counter-increment: step; }
-.steps li::before { content: counter(step); display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: #15231C; font-weight: 800; font-size: var(--step-1); }
-.steps p { color: var(--muted); }
-
-.occasion { display: grid; gap: 32px; align-items: start; }
-@media (min-width: 860px) { .occasion { grid-template-columns: 1fr 1fr; gap: 56px; } }
-.occasion-copy { display: grid; gap: 16px; min-width: 0; }
-.occasion-copy p { color: var(--muted); }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
-.chips li { padding: 6px 12px; border-radius: 999px; background: var(--accent-tint); color: var(--accent-ink); font-weight: 600; font-size: var(--step--1); }
-.menu { border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; background: var(--surface); min-width: 0; }
-.menu-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
-.menu-head span { color: var(--muted); font-size: var(--step--1); }
-.menu dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; }
-.menu dt { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
-.menu dd { margin: 0; }
-.menu .when { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: var(--step--1); }
-
-.points { display: grid; gap: 28px; }
-@media (min-width: 760px) { .points { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; } }
-.points div { display: grid; gap: 8px; align-content: start; border-top: 3px solid var(--accent); padding-top: 16px; }
-.points p { color: var(--muted); }
-
-.cta { background: var(--accent-tint); }
-.cta .wrap { display: grid; gap: 16px; padding-block: 48px; }
-.cta p { color: var(--accent-ink); max-width: 40rem; }
-.cta h2 { color: var(--text); }
-.copyline { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.copyline code, .addr { font-family: var(--font); font-weight: 700; user-select: all; }
-.copy-btn { min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--text); background: transparent; color: var(--text); font: inherit; font-weight: 600; font-size: var(--step--1); cursor: pointer; }
-.copy-btn:hover { background: var(--text); color: var(--bg); }
+.copyline { display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; }
+.addr { font-family: var(--font); font-weight: 700; user-select: all; overflow-wrap: anywhere; }
+.copy-btn { min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid currentColor; background: transparent; color: inherit; font: inherit; font-weight: 600; font-size: var(--step--1); cursor: pointer; }
+.copy-btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
 
 /* reading pages */
-.page-head { padding-block: 40px 8px; }
-.page-head .wrap { display: grid; gap: 12px; }
-.page-head p { color: var(--muted); }
+.page-head { padding-block: 56px 16px; }
+.page-head .wrap, .page-head .read { display: grid; gap: 14px; }
+.page-head h1 { font-size: var(--step-3); }
+.page-head p { color: var(--muted); font-size: var(--step-1); line-height: 1.5; }
 .draft { display: inline-flex; align-self: start; justify-self: start; padding: 6px 12px; border-radius: 999px; background: var(--accent-tint); color: var(--accent-ink); font-weight: 600; font-size: var(--step--1); }
-.prose { padding-block: 16px 64px; }
+.page-head .draft { font-size: var(--step--1); color: var(--accent-ink); line-height: 1.4; }
+.prose { padding-block: 16px 72px; }
 .prose .read { display: grid; gap: 16px; }
 .prose h2 { font-size: var(--step-1); margin-top: 16px; }
 .prose ul, .prose ol { margin: 0; padding-left: 1.25rem; display: grid; gap: 6px; }
@@ -159,76 +111,339 @@ th { font-weight: 700; background: var(--accent-tint); color: var(--accent-ink);
 tr:last-child td { border-bottom: 0; }
 .facts { display: grid; gap: 4px; padding: 16px 18px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
 
-details { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
-summary { cursor: pointer; list-style: none; min-height: 44px; padding: 14px 48px 14px 18px; font-weight: 700; position: relative; }
+details { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); transition: border-color .15s; }
+details[open] { border-color: color-mix(in srgb, var(--text) 22%, var(--line)); }
+summary { cursor: pointer; list-style: none; min-height: 44px; padding: 18px 56px 18px 22px; font-weight: 700; font-size: 1.0625rem; position: relative; }
 summary::-webkit-details-marker { display: none; }
-summary::after { content: "+"; position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-weight: 800; font-size: 1.25rem; color: var(--muted); }
+summary::after { content: "+"; position: absolute; right: 22px; top: 50%; transform: translateY(-50%); font-weight: 600; font-size: 1.4rem; color: var(--muted); }
 details[open] summary::after { content: "\2212"; }
-details > div { padding: 0 18px 16px; display: grid; gap: 10px; color: var(--text); }
+details > div { padding: 0 22px 20px; display: grid; gap: 10px; color: var(--text); }
+details > div p { color: var(--muted); }
 .faq { display: grid; gap: 10px; }
 
 /* footer */
-.site-foot { border-top: 1px solid var(--line); padding-block: 32px 40px; color: var(--muted); font-size: var(--step--1); }
+.site-foot { border-top: 1px solid var(--line); padding-block: 36px 44px; color: var(--muted); font-size: var(--step--1); }
 .site-foot .wrap { display: grid; gap: 16px; }
-.foot-links { display: flex; flex-wrap: wrap; gap: 4px 4px; margin: 0 -10px; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 4px; margin: 0 -10px; }
 .foot-links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px; color: var(--text); font-weight: 600; text-decoration: none; }
 .foot-links a:hover { text-decoration: underline; }
 .legal-line { max-width: 52rem; }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+
+/* ---- home ---- */
+.hero { background: var(--band) radial-gradient(70% 45% at 85% 100%, rgba(227, 167, 47, .10), transparent 100%); color: var(--on-band); position: relative; }
+.hero .wrap { position: relative; display: grid; gap: 48px; padding-block: 32px 0; align-items: end; }
+@media (min-width: 900px) { .hero .wrap { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 40px; padding-top: 48px; } }
+.hero-copy { display: grid; gap: 28px; align-self: center; padding-bottom: 8px; }
+@media (min-width: 900px) { .hero-copy { padding-bottom: 120px; } }
+.hero h1 { color: var(--on-band); max-width: 12ch; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero .lead { font-size: var(--step-1); line-height: 1.5; color: var(--on-band-soft); max-width: 30rem; }
+.soon { display: inline-flex; align-items: center; gap: 10px; justify-self: start; min-height: 44px; padding: 8px 18px; border-radius: 999px; background: rgba(251, 248, 242, .1); border: 1px solid rgba(251, 248, 242, .22); font-weight: 600; font-size: var(--step--1); }
+.soon .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; box-shadow: 0 0 0 4px rgba(227, 167, 47, .2); }
+.hero-phone { justify-self: center; margin-bottom: -120px; position: relative; z-index: 2; }
+.hero-phone .phone { --pw: 340px; }
+@media (min-width: 900px) { .hero-phone { justify-self: end; margin-right: 24px; } }
+
+/* phones: product shots drawn in HTML so they stay sharp at any size */
+.phone { --pw: 320px; width: min(var(--pw), 78vw); aspect-ratio: 300 / 620; background: #0C110E; border-radius: 48px; padding: 11px; box-shadow: 0 0 0 1.5px #2C3A32, var(--shadow-lg), 0 40px 80px -30px rgba(0, 0, 0, .55); position: relative; }
+.phone::before { content: ""; position: absolute; top: 22px; left: 50%; transform: translateX(-50%); width: 92px; height: 26px; border-radius: 20px; background: #0C110E; z-index: 3; }
+.screen { position: relative; height: 100%; border-radius: 38px; overflow: hidden; background: #FBF8F2; color: #1E241F; font-size: 12.5px; line-height: 1.35; display: flex; flex-direction: column; letter-spacing: -0.005em; }
+.sbar { display: flex; justify-content: space-between; align-items: center; padding: 16px 26px 6px; font-weight: 600; font-size: 13px; }
+.sbar svg { height: 11px; width: auto; }
+.scroll { flex: 1; min-height: 0; padding: 14px 16px 0; display: flex; flex-direction: column; gap: 12px; overflow: hidden; }
+.scroll > * { flex-shrink: 0; }
+.s-date { color: #5C625B; font-size: 11.5px; font-weight: 500; }
+.s-title { font-size: 22px; font-weight: 800; letter-spacing: -0.03em; margin-top: -8px; }
+.budget { background: #1E4737; color: #FBF8F2; border-radius: 18px; padding: 14px 15px 13px; display: grid; gap: 8px; }
+.budget .lab { font-size: 11px; color: #B9C8BC; font-weight: 600; letter-spacing: .02em; }
+.budget .big { display: flex; align-items: baseline; gap: 6px; }
+.budget .big b { font-size: 26px; font-weight: 800; letter-spacing: -0.03em; }
+.budget .big span { color: #B9C8BC; font-size: 12px; }
+.bar { height: 7px; border-radius: 99px; background: rgba(251, 248, 242, .16); overflow: hidden; }
+.bar i { display: block; height: 100%; border-radius: 99px; background: #E3A72F; }
+.budget .row { display: flex; justify-content: space-between; font-size: 11px; color: #B9C8BC; }
+.budget .row b { color: #F6E3B8; font-weight: 700; }
+.s-h { font-size: 13px; font-weight: 800; letter-spacing: -0.01em; margin-top: 2px; }
+.meal { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 1px 2px rgba(30, 36, 31, .06), 0 6px 16px -8px rgba(30, 36, 31, .18); }
+.meal img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.meal .body { padding: 10px 12px 12px; display: grid; gap: 2px; }
+.meal .kind { font-size: 9.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #6B4B0E; }
+.meal .name { font-size: 14px; font-weight: 700; letter-spacing: -0.015em; }
+.meal .meta { color: #5C625B; font-size: 11px; }
+.mini { display: flex; gap: 10px; align-items: center; background: #fff; border-radius: 14px; padding: 7px; box-shadow: 0 1px 2px rgba(30, 36, 31, .06); }
+.mini img { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; }
+.mini div { display: grid; min-width: 0; }
+.mini b { font-size: 12px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mini span { color: #5C625B; font-size: 10.5px; }
+@media (max-width: 420px) { .tmrw { display: none; } }
+.tabs { display: flex; justify-content: space-around; padding: 9px 10px 22px; background: rgba(251, 248, 242, .94); border-top: 1px solid #ECE7DA; }
+.tabs span { display: grid; justify-items: center; gap: 2px; font-size: 9.5px; font-weight: 600; color: #8A9088; }
+.tabs svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.tabs .on { color: #1E4737; }
+
+/* list screen */
+.l-sum { display: flex; justify-content: space-between; align-items: end; padding: 2px 2px 0; }
+.l-sum b { font-size: 24px; font-weight: 800; letter-spacing: -0.03em; display: block; }
+.l-sum span { color: #5C625B; font-size: 11px; }
+.l-prog { display: grid; gap: 6px; }
+.l-prog .bar { background: #ECE7DA; }
+.l-prog .bar i { background: #2F7A4F; }
+.l-prog span { color: #5C625B; font-size: 10.5px; }
+.aisle { background: #fff; border-radius: 16px; padding: 4px 12px; box-shadow: 0 1px 2px rgba(30, 36, 31, .06); }
+.aisle h4 { margin: 8px 0 2px; font-size: 9.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #5C625B; }
+.li { display: grid; grid-template-columns: 18px 1fr auto; gap: 9px; align-items: center; padding: 7px 0; border-top: 1px solid #F1ECE1; }
+.aisle h4 + .li { border-top: 0; }
+.li .box { width: 18px; height: 18px; border-radius: 6px; border: 1.6px solid #B8BDB5; display: grid; place-items: center; }
+.li.done .box { background: #2F7A4F; border-color: #2F7A4F; }
+.li .box svg { width: 11px; height: 11px; stroke: #fff; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.li .nm { font-size: 12px; font-weight: 600; min-width: 0; }
+.li .nm small { display: block; color: #5C625B; font-weight: 500; font-size: 10.5px; }
+.li .pr { font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.li.done .nm, .li.done .pr { color: #9AA097; }
+.li.done .nm span { text-decoration: line-through; }
+
+/* sections */
+.section { padding-block: 88px; }
+@media (max-width: 899px) { .section { padding-block: 64px; } }
+.story { padding-top: 184px; }
+@media (max-width: 899px) { .story { padding-top: 168px; } }
+.kicker-h { max-width: 16ch; }
+.story-grid { display: grid; gap: 32px; margin-top: 40px; align-items: center; }
+@media (min-width: 900px) { .story-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 64px; margin-top: 56px; } }
+.photo { border-radius: 22px; overflow: hidden; box-shadow: var(--shadow-md); background: var(--sunk); }
+.photo img { width: 100%; height: 100%; object-fit: cover; }
+.story-copy { display: grid; gap: 20px; }
+.big-p { font-size: clamp(1.2rem, 1.05rem + .6vw, 1.45rem); line-height: 1.5; font-weight: 500; letter-spacing: -0.01em; }
+.muted { color: var(--muted); }
+
+.app { background: var(--sunk); }
+.app-grid { display: grid; gap: 40px; grid-template-areas: "intro" "phone" "facts"; }
+@media (min-width: 900px) { .app-grid { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); grid-template-areas: "phone intro" "phone facts"; grid-template-rows: auto 1fr; gap: 36px 80px; } }
+.app-phone { grid-area: phone; justify-self: center; align-self: center; }
+.app-intro { grid-area: intro; display: grid; gap: 20px; align-self: end; }
+.app-intro > p { font-size: var(--step-1); color: var(--muted); max-width: 34rem; line-height: 1.5; }
+.facts-list { grid-area: facts; list-style: none; margin: 0; padding: 0; display: grid; align-content: start; }
+.facts-list li { display: grid; gap: 6px; padding: 22px 0; border-top: 1px solid var(--line); }
+@media (min-width: 640px) { .facts-list li { grid-template-columns: 13rem 1fr; gap: 24px; } }
+.facts-list li:last-child { border-bottom: 1px solid var(--line); }
+.facts-list h3 { font-size: 1.0625rem; }
+.facts-list p { color: var(--muted); }
+
+.food-head { display: flex; justify-content: space-between; align-items: end; gap: 16px 40px; flex-wrap: wrap; }
+.food-head p { color: var(--muted); max-width: 26rem; font-size: var(--step-1); line-height: 1.5; }
+.strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(200px, 1fr); gap: 16px; margin-top: 40px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; scrollbar-width: thin; }
+@media (max-width: 899px) { .strip { margin-left: calc(-1 * var(--gutter-l)); margin-right: calc(-1 * var(--gutter-r)); padding-left: var(--gutter-l); padding-right: var(--gutter-r); scroll-padding-left: var(--gutter-l); grid-auto-columns: 72%; scrollbar-width: none; } .strip::-webkit-scrollbar { display: none; } }
+.strip figure { margin: 0; scroll-snap-align: start; display: grid; gap: 10px; }
+.strip .photo { aspect-ratio: 4 / 5; }
+.strip figcaption { font-weight: 600; font-size: var(--step--1); }
+
+.occasion { display: grid; gap: 48px; align-items: center; }
+@media (min-width: 900px) { .occasion { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; } }
+.occasion-copy { display: grid; gap: 20px; }
+.occasion-copy > p { color: var(--muted); font-size: var(--step-1); line-height: 1.5; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 4px 0 0; }
+.chips li { padding: 7px 14px; border-radius: 999px; background: var(--accent-tint); color: var(--accent-ink); font-weight: 600; font-size: var(--step--1); }
+.occasion-art { position: relative; padding-bottom: 56px; }
+.occasion-art .photo { aspect-ratio: 4 / 3; }
+.menu { position: relative; margin: -96px 16px 0 auto; width: min(100%, 22rem); background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; box-shadow: var(--shadow-lg); }
+@media (max-width: 899px) { .occasion-art { padding-bottom: 0; } .menu { margin: -56px 14px 0; width: auto; } }
+@media (min-width: 1200px) { .menu { margin-right: -24px; } }
+.menu-head { display: grid; gap: 2px; margin-bottom: 12px; }
+.menu-head b { font-size: 1.0625rem; }
+.menu-head span { color: var(--muted); font-size: var(--step--1); }
+.menu dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 7px 16px; font-size: var(--step--1); }
+.menu dt { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+.menu dd { margin: 0; font-weight: 500; }
+.menu .when { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+
+.next { background: var(--band) radial-gradient(50rem 30rem at 10% 0%, rgba(227, 167, 47, .14), transparent 70%); color: var(--on-band); }
+.next-grid { position: relative; display: grid; gap: 48px; align-items: center; }
+@media (min-width: 900px) { .next-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 80px; } }
+.next-copy { display: grid; gap: 20px; }
+.next-copy h2 { color: var(--on-band); max-width: 15ch; }
+.next-copy p { color: var(--on-band-soft); font-size: var(--step-1); line-height: 1.5; max-width: 34rem; }
+.tag { display: inline-flex; justify-self: start; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--accent); color: #15231C; font-weight: 700; font-size: 0.8rem; letter-spacing: .02em; }
+.basket { background: #FBF8F2; color: #1E241F; border-radius: 22px; padding: 22px; box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .6); display: grid; gap: 16px; max-width: 26rem; width: 100%; justify-self: center; }
+.basket .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.basket .top b { font-size: 1.0625rem; }
+.basket .top span { color: #5C625B; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+.basket .lines { display: grid; gap: 8px; }
+.basket .lines div { display: flex; justify-content: space-between; font-size: 0.875rem; color: #3A403B; }
+.basket .lines div span:last-child { font-weight: 700; font-variant-numeric: tabular-nums; }
+.basket .more { color: #8A9088; font-size: 0.8rem; }
+.basket .btn { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; border-radius: 999px; background: #1E4737; color: #FBF8F2; font-weight: 700; font-size: 0.95rem; }
+.basket .btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.basket .soon-line { text-align: center; color: #5C625B; font-size: 0.8rem; }
+
+.promise { text-align: left; }
+.promise h2 { max-width: 20ch; }
+.promise p { margin-top: 20px; color: var(--muted); font-size: var(--step-1); max-width: 40rem; line-height: 1.5; }
+
+.contact { padding-block: 0 96px; }
+.contact-card { border-radius: 26px; background: var(--accent-tint); color: var(--accent-ink); padding: clamp(28px, 4vw, 56px); display: grid; gap: 18px; }
+@media (min-width: 900px) { .contact-card { grid-template-columns: 1fr auto; align-items: end; } }
+.contact-card h2 { color: var(--text); font-size: var(--step-2); }
+.contact-card p { margin-top: 10px; max-width: 32rem; }
+.contact-card .copyline { color: var(--text); }
 </style>
 </head>
 <body class="home">
-<a class="skip" href="#main">Skip to the content</a><header class="site-head"><div class="wrap"><a class="brand" href="index.html" aria-label="DalaDish home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="20.00 77.12 1795.11 358.08" class="logo" role="img" aria-label="DalaDish" focusable="false"><g><path fill="currentColor" d="M44 228H468Q469.58 228 471.12 228.31Q472.67 228.61 474.12 229.22Q475.58 229.82 476.89 230.7Q478.2 231.57 479.31 232.69Q480.43 233.8 481.3 235.11Q482.18 236.42 482.78 237.88Q483.39 239.33 483.69 240.88Q484 242.42 484 244Q484 245.58 483.69 247.12Q483.39 248.67 482.78 250.12Q482.18 251.58 481.3 252.89Q480.43 254.2 479.31 255.31Q478.2 256.43 476.89 257.3Q475.58 258.18 474.12 258.78Q472.67 259.39 471.12 259.69Q469.58 260 468 260H455.1C447.4 317.53 382.61 395.97 256 388.8C129.39 395.97 64.6 317.53 56.9 260H44Q42.42 260 40.88 259.69Q39.33 259.39 37.88 258.78Q36.42 258.18 35.11 257.3Q33.8 256.43 32.69 255.31Q31.57 254.2 30.7 252.89Q29.82 251.58 29.22 250.12Q28.61 248.67 28.31 247.12Q28 245.58 28 244Q28 242.42 28.31 240.88Q28.61 239.33 29.22 237.88Q29.82 236.42 30.7 235.11Q31.57 233.8 32.69 232.69Q33.8 231.57 35.11 230.7Q36.42 229.82 37.88 229.22Q39.33 228.61 40.88 228.31Q42.42 228 44 228Z"/><path fill="currentColor" d="M193.6 398.4H318.4C322.38 398.4 325.6 401.62 325.6 405.6V420C325.6 423.98 322.38 427.2 318.4 427.2H193.6C189.62 427.2 186.4 423.98 186.4 420V405.6C186.4 401.62 189.62 398.4 193.6 398.4Z"/><path class="steam" d="M242.96 101.12Q242.96 114.34 234.1 129.9Q229.56 137.89 218.15 153.2Q207.92 166.93 204.35 173.2Q199.68 181.41 199.68 186.16Q199.68 187.74 199.37 189.28Q199.07 190.83 198.46 192.28Q197.86 193.74 196.98 195.05Q196.11 196.36 194.99 197.47Q193.88 198.59 192.57 199.46Q191.26 200.34 189.8 200.94Q188.35 201.55 186.8 201.85Q185.26 202.16 183.68 202.16Q182.1 202.16 180.56 201.85Q179.01 201.55 177.56 200.94Q176.1 200.34 174.79 199.46Q173.48 198.59 172.37 197.47Q171.25 196.36 170.38 195.05Q169.5 193.74 168.9 192.28Q168.29 190.83 167.99 189.28Q167.68 187.74 167.68 186.16Q167.68 172.94 176.54 157.38Q181.08 149.39 192.49 134.08Q202.72 120.35 206.29 114.08Q210.96 105.87 210.96 101.12Q210.96 99.54 211.27 98Q211.57 96.45 212.18 95Q212.78 93.54 213.66 92.23Q214.53 90.92 215.65 89.81Q216.76 88.69 218.07 87.82Q219.38 86.94 220.84 86.34Q222.29 85.73 223.84 85.43Q225.38 85.12 226.96 85.12Q228.54 85.12 230.08 85.43Q231.63 85.73 233.08 86.34Q234.54 86.94 235.85 87.82Q237.16 88.69 238.27 89.81Q239.39 90.92 240.26 92.23Q241.14 93.54 241.74 95Q242.35 96.45 242.65 98Q242.96 99.54 242.96 101.12ZM344.32 101.12Q344.32 114.34 335.46 129.9Q330.92 137.89 319.51 153.2Q309.28 166.93 305.71 173.2Q301.04 181.41 301.04 186.16Q301.04 187.74 300.73 189.28Q300.43 190.83 299.82 192.28Q299.22 193.74 298.34 195.05Q297.47 196.36 296.35 197.47Q295.24 198.59 293.93 199.46Q292.62 200.34 291.16 200.94Q289.71 201.55 288.16 201.85Q286.62 202.16 285.04 202.16Q283.46 202.16 281.92 201.85Q280.37 201.55 278.92 200.94Q277.46 200.34 276.15 199.46Q274.84 198.59 273.73 197.47Q272.61 196.36 271.74 195.05Q270.86 193.74 270.26 192.28Q269.65 190.83 269.35 189.28Q269.04 187.74 269.04 186.16Q269.04 172.94 277.9 157.38Q282.44 149.39 293.85 134.08Q304.08 120.35 307.65 114.08Q312.32 105.87 312.32 101.12Q312.32 99.54 312.63 98Q312.93 96.45 313.54 95Q314.14 93.54 315.02 92.23Q315.89 90.92 317.01 89.81Q318.12 88.69 319.43 87.82Q320.74 86.94 322.2 86.34Q323.65 85.73 325.2 85.43Q326.74 85.12 328.32 85.12Q329.9 85.12 331.44 85.43Q332.99 85.73 334.44 86.34Q335.9 86.94 337.21 87.82Q338.52 88.69 339.63 89.81Q340.75 90.92 341.62 92.23Q342.5 93.54 343.1 95Q343.71 96.45 344.01 98Q344.32 99.54 344.32 101.12Z"/></g><path fill="currentColor" transform="translate(549.19 388.80)" d="M18.16 0V-209.2H110.99Q149.2 -209.2 173.32 -197.07Q197.44 -184.94 208.84 -161.62Q220.25 -138.31 220.25 -104.6Q220.25 -70.9 208.84 -47.58Q197.44 -24.26 173.32 -12.13Q149.2 0 110.99 0ZM656.44 0V-209.2H749.28Q787.49 -209.2 811.6 -197.07Q835.72 -184.94 847.12 -161.62Q858.53 -138.31 858.53 -104.6Q858.53 -70.9 847.12 -47.58Q835.72 -24.26 811.6 -12.13Q787.49 0 749.28 0ZM446.84 0Q422.87 0 411.68 -10.31Q400.5 -20.63 400.5 -41.7V-209.2H458.61V-48.81Q458.61 -43.87 459.99 -42.28Q461.37 -40.68 465.87 -40.68H473.71Q473.63 -42.32 473.63 -44.02Q473.63 -63.05 484.6 -74.75Q495.56 -86.44 515.03 -91.82Q534.5 -97.19 560.21 -97.19H576.49V-101.55Q576.49 -114.48 572.35 -120.07Q568.2 -125.67 558.76 -125.67Q549.46 -125.67 544.74 -120.66Q540.02 -115.64 537.84 -105.33L480.75 -114.05Q483.94 -127.41 493.09 -138.09Q502.25 -148.77 519.03 -155.01Q535.81 -161.26 561.81 -161.26Q583.9 -161.26 600.17 -155.09Q616.44 -148.91 625.37 -133Q634.31 -117.1 634.31 -87.75V-48.81Q634.31 -43.87 635.69 -42.28Q637.07 -40.68 641.57 -40.68H647.24V0H622.54Q600.17 0 589.63 -10.39Q585.03 -14.93 582.44 -21.48Q579.75 -16.75 575.83 -12.28Q569.66 -5.23 559.2 -0.65Q548.74 3.92 532.61 3.92Q518.08 3.92 504.57 -0.73Q491.06 -5.38 482.34 -15.91Q477.63 -21.61 475.46 -29.37V0ZM1098.98 0V-209.2H1157.09V-131.91Q1164.34 -145.19 1175.03 -152.4Q1187.75 -160.97 1205.76 -160.97Q1225.23 -160.97 1236.63 -151.96Q1248.04 -142.96 1252.98 -127.56Q1257.92 -112.16 1257.92 -93.12V0H1199.95V-85.57Q1199.95 -104.31 1196.68 -111.43Q1193.41 -118.55 1183.24 -118.55Q1168.86 -118.55 1162.98 -106.85Q1157.09 -95.16 1157.09 -71.77V0ZM277.83 3.92Q263.3 3.92 249.79 -0.73Q236.28 -5.38 227.56 -15.91Q218.85 -26.44 218.85 -44.02Q218.85 -63.05 229.81 -74.75Q240.78 -86.44 260.25 -91.82Q279.72 -97.19 305.43 -97.19H321.7V-101.55Q321.7 -114.48 317.56 -120.07Q313.42 -125.67 303.98 -125.67Q294.68 -125.67 289.96 -120.66Q285.24 -115.64 283.06 -105.33L225.96 -114.05Q229.16 -127.41 238.31 -138.09Q247.47 -148.77 264.25 -155.01Q281.03 -161.26 307.03 -161.26Q329.11 -161.26 345.38 -155.09Q361.66 -148.91 370.59 -133Q379.53 -117.1 379.53 -87.75V-48.81Q379.53 -43.87 380.91 -42.28Q382.29 -40.68 386.79 -40.68H392.46V0H367.76Q345.38 0 334.85 -10.39Q330.25 -14.93 327.66 -21.48Q324.97 -16.75 321.05 -12.28Q314.88 -5.23 304.42 -0.65Q293.96 3.92 277.83 3.92ZM1013.65 4.07Q995.34 4.07 978.2 -0.73Q961.06 -5.52 949.14 -16.05Q937.23 -26.59 934.32 -44.02L984.74 -54.04Q985.9 -44.89 991.71 -39.95Q997.52 -35.01 1011.03 -35.01Q1023.82 -35.01 1028.68 -38.72Q1033.55 -42.42 1033.55 -46.93Q1033.55 -50.99 1029.19 -55.21Q1024.83 -59.42 1011.47 -61.02L1000.86 -62.33Q992 -63.49 981.47 -65.52Q970.93 -67.56 961.49 -72.06Q952.05 -76.56 946.02 -85.06Q939.99 -93.56 939.99 -107.51Q939.99 -123.2 948.49 -135.26Q956.99 -147.31 972.97 -154.14Q988.95 -160.97 1011.03 -160.97Q1029.19 -160.97 1045.32 -155.89Q1061.44 -150.8 1072.7 -140.63Q1083.96 -130.46 1087.16 -115.06L1037.76 -104.75Q1036.75 -108.52 1034.57 -112.74Q1032.39 -116.95 1027.59 -119.93Q1022.8 -122.91 1013.79 -122.91Q1004.49 -122.91 1000.35 -119.57Q996.21 -116.22 996.21 -111.87Q996.21 -107.07 1000.28 -104.31Q1004.35 -101.55 1010.67 -100.1Q1016.99 -98.65 1023.67 -97.77L1037.62 -96.03Q1050.26 -94.43 1062.24 -89.35Q1074.23 -84.26 1082 -74.38Q1089.77 -64.5 1089.77 -48.52Q1089.77 -30.94 1079.68 -19.25Q1069.58 -7.55 1052.29 -1.74Q1035 4.07 1013.65 4.07ZM868.46 0V-156.9H926.57V0ZM716.01 -50.85H742.88Q796.64 -50.85 796.64 -104.6Q796.64 -122.33 790.54 -134.24Q784.43 -146.15 772.52 -152.25Q760.61 -158.36 742.88 -158.36H716.01ZM77.73 -50.85H104.6Q158.36 -50.85 158.36 -104.6Q158.36 -122.33 152.25 -134.24Q146.15 -146.15 134.24 -152.25Q122.33 -158.36 104.6 -158.36H77.73ZM897.52 -169.69Q880.95 -169.69 871.66 -178.99Q862.36 -188.28 862.36 -204.85Q862.36 -221.41 871.66 -230.71Q880.95 -240 897.52 -240Q914.08 -240 923.38 -230.71Q932.67 -221.41 932.67 -204.85Q932.67 -188.28 923.38 -178.99Q914.08 -169.69 897.52 -169.69ZM550.48 -32.83Q559.2 -32.83 565.08 -36.54Q570.97 -40.24 574.02 -46.93Q577.07 -53.61 577.07 -62.47V-67.56H563.7Q551.21 -67.56 544.45 -64.29Q537.7 -61.02 535.15 -56.44Q532.61 -51.87 532.61 -47.65Q532.61 -45.62 533.7 -42.06Q534.79 -38.5 538.57 -35.67Q542.34 -32.83 550.48 -32.83ZM295.7 -32.83Q304.42 -32.83 310.3 -36.54Q316.18 -40.24 319.23 -46.93Q322.29 -53.61 322.29 -62.47V-67.56H308.92Q296.43 -67.56 289.67 -64.29Q282.91 -61.02 280.37 -56.44Q277.83 -51.87 277.83 -47.65Q277.83 -45.62 278.92 -42.06Q280.01 -38.5 283.79 -35.67Q287.56 -32.83 295.7 -32.83Z"/></svg>
-</a><nav class="nav" aria-label="Main"><a href="index.html#how">How it works</a><a href="support.html">Support</a></nav></div></header><main id="main">
+<a class="skip" href="#main">Skip to the content</a><header class="site-head"><div class="wrap"><a class="brand" href="index.html" aria-label="DalaDish home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="20.00 77.12 1795.11 358.08" class="logo" role="img" aria-label="DalaDish" focusable="false"><g><path fill="currentColor" d="M44 228H468Q469.58 228 471.12 228.31Q472.67 228.61 474.12 229.22Q475.58 229.82 476.89 230.7Q478.2 231.57 479.31 232.69Q480.43 233.8 481.3 235.11Q482.18 236.42 482.78 237.88Q483.39 239.33 483.69 240.88Q484 242.42 484 244Q484 245.58 483.69 247.12Q483.39 248.67 482.78 250.12Q482.18 251.58 481.3 252.89Q480.43 254.2 479.31 255.31Q478.2 256.43 476.89 257.3Q475.58 258.18 474.12 258.78Q472.67 259.39 471.12 259.69Q469.58 260 468 260H455.1C447.4 317.53 382.61 395.97 256 388.8C129.39 395.97 64.6 317.53 56.9 260H44Q42.42 260 40.88 259.69Q39.33 259.39 37.88 258.78Q36.42 258.18 35.11 257.3Q33.8 256.43 32.69 255.31Q31.57 254.2 30.7 252.89Q29.82 251.58 29.22 250.12Q28.61 248.67 28.31 247.12Q28 245.58 28 244Q28 242.42 28.31 240.88Q28.61 239.33 29.22 237.88Q29.82 236.42 30.7 235.11Q31.57 233.8 32.69 232.69Q33.8 231.57 35.11 230.7Q36.42 229.82 37.88 229.22Q39.33 228.61 40.88 228.31Q42.42 228 44 228Z"/><path fill="currentColor" d="M193.6 398.4H318.4C322.38 398.4 325.6 401.62 325.6 405.6V420C325.6 423.98 322.38 427.2 318.4 427.2H193.6C189.62 427.2 186.4 423.98 186.4 420V405.6C186.4 401.62 189.62 398.4 193.6 398.4Z"/><path class="steam" d="M242.96 101.12Q242.96 114.34 234.1 129.9Q229.56 137.89 218.15 153.2Q207.92 166.93 204.35 173.2Q199.68 181.41 199.68 186.16Q199.68 187.74 199.37 189.28Q199.07 190.83 198.46 192.28Q197.86 193.74 196.98 195.05Q196.11 196.36 194.99 197.47Q193.88 198.59 192.57 199.46Q191.26 200.34 189.8 200.94Q188.35 201.55 186.8 201.85Q185.26 202.16 183.68 202.16Q182.1 202.16 180.56 201.85Q179.01 201.55 177.56 200.94Q176.1 200.34 174.79 199.46Q173.48 198.59 172.37 197.47Q171.25 196.36 170.38 195.05Q169.5 193.74 168.9 192.28Q168.29 190.83 167.99 189.28Q167.68 187.74 167.68 186.16Q167.68 172.94 176.54 157.38Q181.08 149.39 192.49 134.08Q202.72 120.35 206.29 114.08Q210.96 105.87 210.96 101.12Q210.96 99.54 211.27 98Q211.57 96.45 212.18 95Q212.78 93.54 213.66 92.23Q214.53 90.92 215.65 89.81Q216.76 88.69 218.07 87.82Q219.38 86.94 220.84 86.34Q222.29 85.73 223.84 85.43Q225.38 85.12 226.96 85.12Q228.54 85.12 230.08 85.43Q231.63 85.73 233.08 86.34Q234.54 86.94 235.85 87.82Q237.16 88.69 238.27 89.81Q239.39 90.92 240.26 92.23Q241.14 93.54 241.74 95Q242.35 96.45 242.65 98Q242.96 99.54 242.96 101.12ZM344.32 101.12Q344.32 114.34 335.46 129.9Q330.92 137.89 319.51 153.2Q309.28 166.93 305.71 173.2Q301.04 181.41 301.04 186.16Q301.04 187.74 300.73 189.28Q300.43 190.83 299.82 192.28Q299.22 193.74 298.34 195.05Q297.47 196.36 296.35 197.47Q295.24 198.59 293.93 199.46Q292.62 200.34 291.16 200.94Q289.71 201.55 288.16 201.85Q286.62 202.16 285.04 202.16Q283.46 202.16 281.92 201.85Q280.37 201.55 278.92 200.94Q277.46 200.34 276.15 199.46Q274.84 198.59 273.73 197.47Q272.61 196.36 271.74 195.05Q270.86 193.74 270.26 192.28Q269.65 190.83 269.35 189.28Q269.04 187.74 269.04 186.16Q269.04 172.94 277.9 157.38Q282.44 149.39 293.85 134.08Q304.08 120.35 307.65 114.08Q312.32 105.87 312.32 101.12Q312.32 99.54 312.63 98Q312.93 96.45 313.54 95Q314.14 93.54 315.02 92.23Q315.89 90.92 317.01 89.81Q318.12 88.69 319.43 87.82Q320.74 86.94 322.2 86.34Q323.65 85.73 325.2 85.43Q326.74 85.12 328.32 85.12Q329.9 85.12 331.44 85.43Q332.99 85.73 334.44 86.34Q335.9 86.94 337.21 87.82Q338.52 88.69 339.63 89.81Q340.75 90.92 341.62 92.23Q342.5 93.54 343.1 95Q343.71 96.45 344.01 98Q344.32 99.54 344.32 101.12Z"/></g><path fill="currentColor" transform="translate(549.19 388.80)" d="M18.16 0V-209.2H110.99Q149.2 -209.2 173.32 -197.07Q197.44 -184.94 208.84 -161.62Q220.25 -138.31 220.25 -104.6Q220.25 -70.9 208.84 -47.58Q197.44 -24.26 173.32 -12.13Q149.2 0 110.99 0ZM656.44 0V-209.2H749.28Q787.49 -209.2 811.6 -197.07Q835.72 -184.94 847.12 -161.62Q858.53 -138.31 858.53 -104.6Q858.53 -70.9 847.12 -47.58Q835.72 -24.26 811.6 -12.13Q787.49 0 749.28 0ZM446.84 0Q422.87 0 411.68 -10.31Q400.5 -20.63 400.5 -41.7V-209.2H458.61V-48.81Q458.61 -43.87 459.99 -42.28Q461.37 -40.68 465.87 -40.68H473.71Q473.63 -42.32 473.63 -44.02Q473.63 -63.05 484.6 -74.75Q495.56 -86.44 515.03 -91.82Q534.5 -97.19 560.21 -97.19H576.49V-101.55Q576.49 -114.48 572.35 -120.07Q568.2 -125.67 558.76 -125.67Q549.46 -125.67 544.74 -120.66Q540.02 -115.64 537.84 -105.33L480.75 -114.05Q483.94 -127.41 493.09 -138.09Q502.25 -148.77 519.03 -155.01Q535.81 -161.26 561.81 -161.26Q583.9 -161.26 600.17 -155.09Q616.44 -148.91 625.37 -133Q634.31 -117.1 634.31 -87.75V-48.81Q634.31 -43.87 635.69 -42.28Q637.07 -40.68 641.57 -40.68H647.24V0H622.54Q600.17 0 589.63 -10.39Q585.03 -14.93 582.44 -21.48Q579.75 -16.75 575.83 -12.28Q569.66 -5.23 559.2 -0.65Q548.74 3.92 532.61 3.92Q518.08 3.92 504.57 -0.73Q491.06 -5.38 482.34 -15.91Q477.63 -21.61 475.46 -29.37V0ZM1098.98 0V-209.2H1157.09V-131.91Q1164.34 -145.19 1175.03 -152.4Q1187.75 -160.97 1205.76 -160.97Q1225.23 -160.97 1236.63 -151.96Q1248.04 -142.96 1252.98 -127.56Q1257.92 -112.16 1257.92 -93.12V0H1199.95V-85.57Q1199.95 -104.31 1196.68 -111.43Q1193.41 -118.55 1183.24 -118.55Q1168.86 -118.55 1162.98 -106.85Q1157.09 -95.16 1157.09 -71.77V0ZM277.83 3.92Q263.3 3.92 249.79 -0.73Q236.28 -5.38 227.56 -15.91Q218.85 -26.44 218.85 -44.02Q218.85 -63.05 229.81 -74.75Q240.78 -86.44 260.25 -91.82Q279.72 -97.19 305.43 -97.19H321.7V-101.55Q321.7 -114.48 317.56 -120.07Q313.42 -125.67 303.98 -125.67Q294.68 -125.67 289.96 -120.66Q285.24 -115.64 283.06 -105.33L225.96 -114.05Q229.16 -127.41 238.31 -138.09Q247.47 -148.77 264.25 -155.01Q281.03 -161.26 307.03 -161.26Q329.11 -161.26 345.38 -155.09Q361.66 -148.91 370.59 -133Q379.53 -117.1 379.53 -87.75V-48.81Q379.53 -43.87 380.91 -42.28Q382.29 -40.68 386.79 -40.68H392.46V0H367.76Q345.38 0 334.85 -10.39Q330.25 -14.93 327.66 -21.48Q324.97 -16.75 321.05 -12.28Q314.88 -5.23 304.42 -0.65Q293.96 3.92 277.83 3.92ZM1013.65 4.07Q995.34 4.07 978.2 -0.73Q961.06 -5.52 949.14 -16.05Q937.23 -26.59 934.32 -44.02L984.74 -54.04Q985.9 -44.89 991.71 -39.95Q997.52 -35.01 1011.03 -35.01Q1023.82 -35.01 1028.68 -38.72Q1033.55 -42.42 1033.55 -46.93Q1033.55 -50.99 1029.19 -55.21Q1024.83 -59.42 1011.47 -61.02L1000.86 -62.33Q992 -63.49 981.47 -65.52Q970.93 -67.56 961.49 -72.06Q952.05 -76.56 946.02 -85.06Q939.99 -93.56 939.99 -107.51Q939.99 -123.2 948.49 -135.26Q956.99 -147.31 972.97 -154.14Q988.95 -160.97 1011.03 -160.97Q1029.19 -160.97 1045.32 -155.89Q1061.44 -150.8 1072.7 -140.63Q1083.96 -130.46 1087.16 -115.06L1037.76 -104.75Q1036.75 -108.52 1034.57 -112.74Q1032.39 -116.95 1027.59 -119.93Q1022.8 -122.91 1013.79 -122.91Q1004.49 -122.91 1000.35 -119.57Q996.21 -116.22 996.21 -111.87Q996.21 -107.07 1000.28 -104.31Q1004.35 -101.55 1010.67 -100.1Q1016.99 -98.65 1023.67 -97.77L1037.62 -96.03Q1050.26 -94.43 1062.24 -89.35Q1074.23 -84.26 1082 -74.38Q1089.77 -64.5 1089.77 -48.52Q1089.77 -30.94 1079.68 -19.25Q1069.58 -7.55 1052.29 -1.74Q1035 4.07 1013.65 4.07ZM868.46 0V-156.9H926.57V0ZM716.01 -50.85H742.88Q796.64 -50.85 796.64 -104.6Q796.64 -122.33 790.54 -134.24Q784.43 -146.15 772.52 -152.25Q760.61 -158.36 742.88 -158.36H716.01ZM77.73 -50.85H104.6Q158.36 -50.85 158.36 -104.6Q158.36 -122.33 152.25 -134.24Q146.15 -146.15 134.24 -152.25Q122.33 -158.36 104.6 -158.36H77.73ZM897.52 -169.69Q880.95 -169.69 871.66 -178.99Q862.36 -188.28 862.36 -204.85Q862.36 -221.41 871.66 -230.71Q880.95 -240 897.52 -240Q914.08 -240 923.38 -230.71Q932.67 -221.41 932.67 -204.85Q932.67 -188.28 923.38 -178.99Q914.08 -169.69 897.52 -169.69ZM550.48 -32.83Q559.2 -32.83 565.08 -36.54Q570.97 -40.24 574.02 -46.93Q577.07 -53.61 577.07 -62.47V-67.56H563.7Q551.21 -67.56 544.45 -64.29Q537.7 -61.02 535.15 -56.44Q532.61 -51.87 532.61 -47.65Q532.61 -45.62 533.7 -42.06Q534.79 -38.5 538.57 -35.67Q542.34 -32.83 550.48 -32.83ZM295.7 -32.83Q304.42 -32.83 310.3 -36.54Q316.18 -40.24 319.23 -46.93Q322.29 -53.61 322.29 -62.47V-67.56H308.92Q296.43 -67.56 289.67 -64.29Q282.91 -61.02 280.37 -56.44Q277.83 -51.87 277.83 -47.65Q277.83 -45.62 278.92 -42.06Q280.01 -38.5 283.79 -35.67Q287.56 -32.83 295.7 -32.83Z"/></svg></a><nav class="nav" aria-label="Main"><a href="index.html#how">How it works</a><a href="index.html#next">What's next</a><a href="support.html">Support</a></nav></div></header>
+<main id="main">
 <section class="hero"><div class="wrap">
   <div class="hero-copy">
     <h1>Know what's for supper all week, <em>and what it'll cost</em>.</h1>
-    <p class="soon"><span class="dot" aria-hidden="true"></span>Coming soon to the App Store and Google Play</p>
+    <p class="soon"><span class="dot" aria-hidden="true"></span>Coming to the App Store and Google Play</p>
   </div>
-  <aside class="slip" aria-label="Shopping list"><div class="slip-head"><b>Shopping list</b><span>Family of four</span></div><div class="aisle"><h3>Fresh produce</h3><div class="item"><span>Potatoes, 2 kg</span><span class="rand">R49.99</span></div><div class="item"><span>Bananas, 1.2 kg</span><span class="rand">R39.99</span></div></div><div class="aisle"><h3>Meat and fish</h3><div class="item"><span>Chicken pieces, 1.5 kg</span><span class="rand">R89.99</span></div><div class="item"><span>Beef mince, 550 g</span><span class="rand">R60.49</span></div></div><div class="aisle"><h3>Dairy and eggs</h3><div class="item"><span>Full cream milk, 2 L</span><span class="rand">R32.99</span></div><div class="item"><span>Eggs, 30</span><span class="rand">R109.99</span></div></div><div class="aisle"><h3>Food cupboard</h3><div class="item"><span>Super maize meal, 2.5 kg</span><span class="rand">R39.99</span></div><div class="item"><span>Long-grain rice, 2 kg</span><span class="rand">R39.99</span></div></div><div class="total"><span>8 items</span><span class="rand">R463.42</span></div></aside>
+  <div class="hero-phone">
+    <div class="phone" role="img" aria-label="The DalaDish Today screen: this week's food comes to R1 412 of an R1 800 budget, with bobotie and yellow rice for supper tonight.">
+      <div class="screen">
+        <div class="sbar" aria-hidden="true"><span>9:41</span><svg viewBox="0 0 60 12"><g fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="6" width="3" height="6" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><path d="M30 3.2a10 10 0 0 1 12 0l-1.4 1.6a7.8 7.8 0 0 0-9.2 0zM32.6 6.4a6 6 0 0 1 6.8 0L36 10.5z"/><rect x="45" y="1" width="13" height="10" rx="3" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="47" y="3" width="9" height="6" rx="1.5"/><rect x="58.6" y="4.3" width="1.4" height="3.4" rx=".6"/></g></svg></div>
+        <div class="scroll">
+          <p class="s-date">Friday 23 October</p>
+          <p class="s-title">Good afternoon</p>
+          <div class="budget">
+            <span class="lab">This week's food</span>
+            <div class="big"><b>R1 412</b><span>of R1 800</span></div>
+            <div class="bar"><i style="width:78%"></i></div>
+            <div class="row"><span>28 meals planned</span><b>R388 to spare</b></div>
+          </div>
+          <p class="s-h">Tonight</p>
+          <div class="meal">
+            <img src="assets/photos/bobotie.jpg" alt="" width="600" height="450">
+            <div class="body"><span class="kind">Supper</span><span class="name">Bobotie with yellow rice</span><span class="meta">1 h 10 min · R96.40 · R24.10 a plate</span></div>
+          </div>
+          <p class="s-h tmrw">Tomorrow</p>
+          <div class="mini tmrw"><img src="assets/photos/d_wors_mash.jpg" alt="" width="600" height="450"><div><b>Boerewors, mash and smoor</b><span>Supper · 35 min · R18.75 a plate</span></div></div>
+        </div>
+        <div class="tabs" aria-hidden="true"><span class="on"><svg viewBox="0 0 24 24"><path d="M7 3v8M5 3v4a2 2 0 0 0 4 0V3M7 11v10M17 21V3c-2.2 1.6-3 4-3 7.5h3"/></svg>Today</span><span><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Week</span><span><svg viewBox="0 0 24 24"><path d="M3 4h2.2l2.3 10.5h10.6L20.4 7H6.3"/><circle cx="9" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></svg>List</span><span><svg viewBox="0 0 24 24"><path d="M12 6.5C10.3 5 7.8 4.5 4 4.5v14c3.8 0 6.3.5 8 2 1.7-1.5 4.2-2 8-2v-14c-3.8 0-6.3.5-8 2zM12 6.5v14"/></svg>Recipes</span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20.5c1.4-3.6 4.2-5.4 7.5-5.4s6.1 1.8 7.5 5.4"/></svg>Me</span></div>
+      </div>
+    </div>
+  </div>
 </div></section>
 
-<section class="section" id="how" aria-labelledby="how-h"><div class="wrap">
-  <div class="section-head"><h2 id="how-h">How it works</h2><p>Set it up once. After that, next week's plan is waiting for you on the weekend.</p></div>
-  <ol class="steps">
-    <li><h3>Tell us about your household</h3><p>Who's eating, what you can spend this week, any allergies, and the foods someone at your table simply won't touch.</p></li>
-    <li><h3>Get a plan that fits the money</h3><p>Breakfast, lunch, supper and snacks, added up against your budget. Not in the mood for fish on Thursday? Swap it for something else.</p></li>
-    <li><h3>Shop once, then cook</h3><p>One list, grouped by aisle, without the things you already have. In the kitchen, the recipe goes one step at a time, with a timer for anything that needs to simmer.</p></li>
-  </ol>
+<section class="section story" aria-labelledby="story-h"><div class="wrap">
+  <h2 id="story-h" class="kicker-h">Every week starts with the same sum.</h2>
+  <div class="story-grid">
+    <div class="photo" style="aspect-ratio: 4 / 3"><img src="assets/photos/d_potjie.jpg" alt="A chicken potjie simmering over the coals" width="600" height="450" loading="lazy"></div>
+    <div class="story-copy">
+      <p class="big-p">There's an amount you can spend on food this week. Prices move from one week to the next, month-end comes around regardless, and every evening someone asks what's for supper.</p>
+      <p class="muted">DalaDish starts with that amount. It plans breakfast, lunch and supper for everyone at your table, prices every ingredient at the store you shop at, and builds the week to fit your budget.</p>
+    </div>
+  </div>
 </div></section>
 
-<section class="section" aria-labelledby="prep-h"><div class="wrap occasion">
+<section class="section app" id="how" aria-labelledby="how-h"><div class="wrap app-grid">
+  <div class="app-phone">
+    <div class="phone" role="img" aria-label="The DalaDish shopping list: 33 items for the week at R1 278.63, sorted by aisle, with 12 already ticked off.">
+      <div class="screen">
+        <div class="sbar" aria-hidden="true"><span>9:41</span><svg viewBox="0 0 60 12"><g fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="6" width="3" height="6" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><path d="M30 3.2a10 10 0 0 1 12 0l-1.4 1.6a7.8 7.8 0 0 0-9.2 0zM32.6 6.4a6 6 0 0 1 6.8 0L36 10.5z"/><rect x="45" y="1" width="13" height="10" rx="3" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="47" y="3" width="9" height="6" rx="1.5"/><rect x="58.6" y="4.3" width="1.4" height="3.4" rx=".6"/></g></svg></div>
+        <div class="scroll">
+          <p class="s-title" style="margin-top:0">Shopping list</p>
+          <div class="l-sum"><div><b>R1 278.63</b><span>33 items for the week</span></div></div>
+          <div class="l-prog"><div class="bar"><i style="width:36%"></i></div><span>12 of 33 in the trolley</span></div>
+          <div class="aisle">
+            <h4>Fresh produce</h4>
+            <div class="li done"><span class="box"><svg viewBox="0 0 24 24"><polyline points="5 12.5 10 17 19 7.5"/></svg></span><span class="nm"><span>Onions</span><small>2 kg</small></span><span class="pr">R34.99</span></div>
+            <div class="li done"><span class="box"><svg viewBox="0 0 24 24"><polyline points="5 12.5 10 17 19 7.5"/></svg></span><span class="nm"><span>Tomatoes</span><small>1 kg</small></span><span class="pr">R24.99</span></div>
+            <div class="li"><span class="box"></span><span class="nm"><span>Cabbage</span><small>1 head</small></span><span class="pr">R16.99</span></div>
+            <div class="li"><span class="box"></span><span class="nm"><span>Carrots</span><small>1 kg</small></span><span class="pr">R14.99</span></div>
+          </div>
+          <div class="aisle">
+            <h4>Meat and fish</h4>
+            <div class="li done"><span class="box"><svg viewBox="0 0 24 24"><polyline points="5 12.5 10 17 19 7.5"/></svg></span><span class="nm"><span>Boerewors</span><small>1 kg</small></span><span class="pr">R99.99</span></div>
+            <div class="li"><span class="box"></span><span class="nm"><span>Beef mince</span><small>1 kg</small></span><span class="pr">R109.99</span></div>
+            <div class="li"><span class="box"></span><span class="nm"><span>Chicken pieces</span><small>2 kg</small></span><span class="pr">R119.99</span></div>
+          </div>
+          <div class="aisle">
+            <h4>Food cupboard</h4>
+            <div class="li"><span class="box"></span><span class="nm"><span>Maize meal</span><small>5 kg</small></span><span class="pr">R74.99</span></div>
+          </div>
+        </div>
+        <div class="tabs" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M7 3v8M5 3v4a2 2 0 0 0 4 0V3M7 11v10M17 21V3c-2.2 1.6-3 4-3 7.5h3"/></svg>Today</span><span><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Week</span><span class="on"><svg viewBox="0 0 24 24"><path d="M3 4h2.2l2.3 10.5h10.6L20.4 7H6.3"/><circle cx="9" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></svg>List</span><span><svg viewBox="0 0 24 24"><path d="M12 6.5C10.3 5 7.8 4.5 4 4.5v14c3.8 0 6.3.5 8 2 1.7-1.5 4.2-2 8-2v-14c-3.8 0-6.3.5-8 2zM12 6.5v14"/></svg>Recipes</span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20.5c1.4-3.6 4.2-5.4 7.5-5.4s6.1 1.8 7.5 5.4"/></svg>Me</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="app-intro">
+    <h2 id="how-h">Every meal comes with a price.</h2>
+    <p>You see what the week will cost before you set foot in a shop, and you see the total change when you change the plan.</p>
+  </div>
+    <ul class="facts-list">
+      <li><h3>Priced as you plan</h3><p>Each meal shows what it costs and what that comes to per plate. Swap Thursday's supper and the week's total moves with it.</p></li>
+      <li><h3>One list, by aisle</h3><p>Everything the week needs in one list, without the oil and spices already in your cupboard. Tick things off as they go into the trolley.</p></li>
+      <li><h3>Next week, ready on Saturday</h3><p>Over the weekend, next week's plan is waiting. Change what you like, then shop.</p></li>
+      <li><h3>Step by step at the stove</h3><p>Recipes one step at a time, with a timer for anything that has to simmer.</p></li>
+      <li><h3>One plan for the household</h3><p>Share a family code with your partner, and you plan, shop and cook from the same week on two phones.</p></li>
+    </ul>
+</div></section>
+
+<section class="section" aria-labelledby="food-h"><div class="wrap">
+  <div class="food-head">
+    <h2 id="food-h">Nearly 300 everyday dishes.</h2>
+    <p>From pap and wors to bobotie, mutton curry and a Sunday roast. Each one costed for your household.</p>
+  </div>
+  <div class="strip" role="list">
+    <figure role="listitem"><div class="photo"><img src="assets/photos/bobotie.jpg" alt="Bobotie with yellow rice and chutney" width="600" height="450" loading="lazy"></div><figcaption>Bobotie and yellow rice</figcaption></figure>
+    <figure role="listitem"><div class="photo"><img src="assets/photos/n_mutton_curry.jpg" alt="Mutton and potato curry with rotis" width="600" height="450" loading="lazy"></div><figcaption>Mutton curry and rotis</figcaption></figure>
+    <figure role="listitem"><div class="photo"><img src="assets/photos/d_wors_mash.jpg" alt="A coil of boerewors with mash and tomato smoor" width="600" height="450" loading="lazy"></div><figcaption>Boerewors, mash and smoor</figcaption></figure>
+    <figure role="listitem"><div class="photo"><img src="assets/photos/d_roast_chicken.jpg" alt="Roast chicken with potatoes, carrots and peas" width="600" height="450" loading="lazy"></div><figcaption>Sunday roast chicken</figcaption></figure>
+    <figure role="listitem"><div class="photo"><img src="assets/photos/dess_malva.jpg" alt="Malva pudding with custard" width="600" height="450" loading="lazy"></div><figcaption>Malva pudding and custard</figcaption></figure>
+  </div>
+</div></section>
+
+<section class="section" aria-labelledby="prep-h" style="padding-top:24px"><div class="wrap occasion">
   <div class="occasion-copy">
     <h2 id="prep-h">Having people over?</h2>
     <p>Sunday lunch with the family, a braai for half the street, a child's birthday. Tell DalaDish how many are coming and what you want to spend. It plans the menu, salads, pudding and drinks included, writes the shopping list, and reminds you what to do the day before.</p>
     <ul class="chips" aria-label="Occasions"><li>Sunday lunch</li><li>Braai</li><li>Birthday</li><li>Year-end function</li><li>Christmas lunch</li><li>Kids' party</li></ul>
   </div>
-  <div class="menu" aria-label="Braai menu">
-    <div class="menu-head"><b>A braai for 14</b><span>10 adults, 4 kids, R1 500</span></div>
-    <dl>
-      <dt>Mains</dt><dd>Boerewors and lamb chops</dd>
-      <dt>Sides</dt><dd>Pap and chakalaka, braaibroodjies</dd>
-      <dt>Salads</dt><dd>Green salad, beetroot salad</dd>
-      <dt>Dessert</dt><dd>Malva pudding with custard</dd>
-      <dt>Drinks</dt><dd>Ginger beer and fruit juice</dd>
-    </dl>
-    <p class="when">Day before: marinate the chops and make the beetroot salad. On the day: light the fire 90 minutes before you eat.</p>
+  <div class="occasion-art">
+    <div class="photo"><img src="assets/photos/o_braai_lamb_chops.jpg" alt="Lamb chops off the braai on a wooden board" width="600" height="450" loading="lazy"></div>
+    <div class="menu" aria-label="Braai menu">
+      <div class="menu-head"><b>A braai for 14</b><span>10 adults, 4 kids, R1 500</span></div>
+      <dl>
+        <dt>Mains</dt><dd>Boerewors and lamb chops</dd>
+        <dt>Sides</dt><dd>Pap and chakalaka, braaibroodjies</dd>
+        <dt>Salads</dt><dd>Green salad, beetroot salad</dd>
+        <dt>Dessert</dt><dd>Malva pudding with custard</dd>
+        <dt>Drinks</dt><dd>Ginger beer and fruit juice</dd>
+      </dl>
+      <p class="when">Day before: marinate the chops and make the beetroot salad. On the day: light the fire 90 minutes before you eat.</p>
+    </div>
   </div>
 </div></section>
 
-<section class="section" aria-labelledby="real-h"><div class="wrap">
-  <div class="section-head"><h2 id="real-h">A few things we were careful about</h2></div>
-  <div class="points">
-    <div><h3>Allergies</h3><p>Pick from 12 common allergens, plus anything you just don't eat, and those recipes and products stay out of your plan. Please still read the label, because manufacturers change their recipes.</p></div>
-    <div><h3>What's already in the cupboard</h3><p>Tick the oil, salt and spices you already have, and they stay off your list. No more third bottle of oil at the back of the cupboard.</p></div>
-    <div><h3>Free, and no ads</h3><p>Planning, the shopping list, the recipes and the meals for when people come over all cost nothing. We don't sell your information, and we don't show you ads.</p></div>
+<section class="section next" id="next" aria-labelledby="next-h"><div class="wrap next-grid">
+  <div class="next-copy">
+    <span class="tag">Coming next</span>
+    <h2 id="next-h">From your list straight to your online basket.</h2>
+    <p>Today, DalaDish opens each item on the store's website and you add it to your basket there. Next, one tap will send the whole list to your online basket, wherever the store supports it.</p>
+    <p>You still shop and pay with the store as usual. DalaDish never sees your login or your card.</p>
+  </div>
+  <div class="basket" role="img" aria-label="A shopping list of 33 items at R1 278.63, with a button to send it to an online basket. This is coming next.">
+    <div class="top"><b>Shopping list</b><span>33 items · R1 278.63</span></div>
+    <div class="lines">
+      <div><span>Onions, 2 kg</span><span>R34.99</span></div>
+      <div><span>Beef mince, 1 kg</span><span>R109.99</span></div>
+      <div><span>Maize meal, 5 kg</span><span>R74.99</span></div>
+      <p class="more">and 30 more</p>
+    </div>
+    <div class="btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 10.5h10.6L20.4 7H6.3"/><circle cx="9" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></svg>Send to my online basket</div>
+    <p class="soon-line">Coming next, store by store</p>
   </div>
 </div></section>
 
-<section class="cta" aria-labelledby="soon-h"><div class="wrap">
-  <h2 id="soon-h">Got a question or an idea?</h2>
-  <p>Send us an email. We read every one and usually reply within two working days.</p>
-  <div class="copyline"><span class="addr" id="mail-hello">hello@daladish.co.za</span><button class="copy-btn" type="button" data-copy="hello@daladish.co.za" aria-controls="mail-hello">Copy address</button></div>
+<section class="section promise" aria-labelledby="promise-h"><div class="wrap">
+  <h2 id="promise-h">Free, no ads, and we never sell your information.</h2>
+  <p>Allergies you choose stay out of every plan. Please still check the label.</p>
+</div></section>
+
+<section class="contact" aria-labelledby="contact-h"><div class="wrap">
+  <div class="contact-card">
+    <div><h2 id="contact-h">Questions, or an idea for DalaDish?</h2><p>Email us. We read every message and usually reply within two working days.</p></div>
+    <div class="copyline"><span class="addr" id="mail-hello">hello@daladish.co.za</span><button class="copy-btn" type="button" data-copy="hello@daladish.co.za" aria-controls="mail-hello">Copy address</button></div>
+  </div>
 </div></section>
 </main><footer class="site-foot"><div class="wrap"><nav class="foot-links" aria-label="All pages"><a href="index.html">Home</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="paia.html">PAIA manual</a><a href="delete-account.html">Delete account</a></nav><p class="legal-line">DalaDish is a product of MFH Technologies (Pty) Ltd · Reg. No. 2026/583234/07 · 874 Odell Street, Wingate Park, Gauteng 0181 · <a href="tel:+27670157701">+27 67 015 7701</a> · Director: SJ Pieterse · Information Officer registration 2026-069384</p></div></footer><script>
 document.addEventListener('click', function (e) {
