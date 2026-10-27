@@ -6,117 +6,107 @@
 <title>Terms · DalaDish</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="The terms for using DalaDish.">
-<meta name="theme-color" content="#F8F6F1" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#161412" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/daladish_appicon_green_180.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap"><style>
-/* Shared by every page. DalaDish style lock, 27 October 2026: enamel by day,
-   potjie by night. Colours come from the dish photos: cobalt from the plate
-   rims, mustard from the logo's steam, potjie cast-iron black. Headings in
-   Newsreader, everything else in Schibsted Grotesk (the wordmark's face). */
+<meta name="theme-color" content="#F5EFE4" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#17130F" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/daladish_appicon_green_180.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;600;700;800;900&display=swap"><style>
+/* Shared by every page. DalaDish, 27 October 2026 (Stephan's pick): chilli. Cream and near-black with the red of
+   chakalaka and a braai fire. Schibsted Grotesk (the wordmark's face) set big and tight; the home page adds one
+   hand-written word per section and numbers in JetBrains Mono. */
 :root {
-  --bg: #F8F6F1;          /* glaze white */
+  --bg: #F5EFE4;          /* cream */
   --surface: #FFFFFF;
-  --sunk: #EDEFF4;        /* enamel tint */
-  --text: #1C1917;        /* potjie black */
-  --text-2: #3E3934;
-  --muted: #66605A;
-  --line: #E4E1D9;
-  --head: #22306E;        /* cobalt, day only */
-  --link: #22306E;
-  --act: #22306E; --act-2: #2F3F8A; --on-act: #FFFFFF;
-  --accent: #E3A72F;      /* mustard, the steam */
-  --accent-soft: #F2CD7E;
-  --accent-tint: #F7E8C6;
-  --accent-ink: #5E430C;
-  --band: #1C1917;        /* the potjie band */
-  --on-band: #F8F6F1; --band-muted: #CFC8BE; --band-strong: #F2CD7E; --band-line: rgba(248, 246, 241, .14);
-  --cobalt-band: #22306E; --on-cobalt: #F8F6F1; --cobalt-muted: #C5CBE0;
-  --logo: #22306E;
-  --shadow-card: 0 1px 0 rgba(28, 25, 23, .03), 0 30px 60px -36px rgba(28, 25, 23, .32);
-  --shadow-md: 0 1px 2px rgba(28, 25, 23, .06), 0 12px 28px -14px rgba(28, 25, 23, .28);
-  --r-sm: 8px; --r-md: 14px; --r-photo: 13px; --r-lg: 22px;
-  --font: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sunk: #EFE6D8;
+  --text: #17130F;        /* near-black */
+  --text-2: #3A332C;
+  --muted: #5E554C;
+  --line: rgba(23, 19, 15, .14);
+  --chilli: #C23F26;      /* the accent: the action, the number, the hand-written word */
+  --link: #B03822;
+  --on-chilli: #FFF8F0;
+  --band: #17130F; --on-band: #F5EFE4; --on-band-soft: #CFC6BA; --band-accent: #F06A4A;
+  --tint: #F6E2D8; --tint-ink: #8E2A18;
+  --logo: #17130F;
+  --shadow: 0 1px 2px rgba(23, 19, 15, .06), 0 24px 50px -28px rgba(23, 19, 15, .35);
+  --r: 18px;
+  --font: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --hand: "Nanum Brush Script", "Bradley Hand", cursive;
   --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --step--1: 0.9rem; --step-0: 1.0625rem; --step-1: 1.25rem; --step-2: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
-  --step-3: clamp(2rem, 1.4rem + 1.8vw, 2.9rem); --step-4: clamp(2.35rem, 1.35rem + 2.9vw, 3.75rem);
-  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
-  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --step--1: 0.9rem; --step-0: 1.0625rem; --step-1: 1.25rem; --step-2: clamp(1.6rem, 1.2rem + 1.4vw, 2.2rem);
+  --step-3: clamp(2.2rem, 1.4rem + 3vw, 3.6rem);
+  --gut: clamp(18px, 4vw, 48px);
 }
-/* Night: potjie black. Cobalt never sits on black (1.5:1), so mustard takes over. */
+/* At night the cream turns to a warm black and the red brightens so it still reads. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #161412; --surface: #221F1B; --sunk: #1D1A17; --text: #F3EFE7; --text-2: #D6D0C6; --muted: #A69F95; --line: #36312B;
-    --head: #F3EFE7; --link: #F2CD7E; --act: #E3A72F; --act-2: #F2CD7E; --on-act: #1C1917;
-    --accent-tint: #3B3019; --accent-ink: #F2D18A;
-    --band: #221F1B; --on-band: #F3EFE7; --band-muted: #CFC8BE; --band-strong: #F2CD7E; --band-line: rgba(243, 239, 231, .12);
-    --logo: #F3EFE7;
-    --shadow-card: 0 1px 0 rgba(0, 0, 0, .3), 0 30px 60px -36px rgba(0, 0, 0, .8);
-    --shadow-md: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 28px -14px rgba(0, 0, 0, .7);
+    --bg: #17130F; --surface: #221C17; --sunk: #1D1813; --text: #F5EFE4; --text-2: #DDD4C7; --muted: #ABA196; --line: rgba(245, 239, 228, .14);
+    --chilli: #F06A4A; --link: #F4876A; --on-chilli: #17130F;
+    --band: #221C17; --on-band: #F5EFE4; --on-band-soft: #CFC6BA; --band-accent: #F06A4A;
+    --tint: #3A2219; --tint-ink: #F6C3B2; --logo: #F5EFE4;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 24px 50px -28px rgba(0, 0, 0, .8);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #161412; --surface: #221F1B; --sunk: #1D1A17; --text: #F3EFE7; --text-2: #D6D0C6; --muted: #A69F95; --line: #36312B;
-  --head: #F3EFE7; --link: #F2CD7E; --act: #E3A72F; --act-2: #F2CD7E; --on-act: #1C1917;
-  --accent-tint: #3B3019; --accent-ink: #F2D18A;
-  --band: #221F1B; --on-band: #F3EFE7; --band-muted: #CFC8BE; --band-strong: #F2CD7E; --band-line: rgba(243, 239, 231, .12);
-  --logo: #F3EFE7;
-  --shadow-card: 0 1px 0 rgba(0, 0, 0, .3), 0 30px 60px -36px rgba(0, 0, 0, .8);
-  --shadow-md: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 28px -14px rgba(0, 0, 0, .7);
+  --bg: #17130F; --surface: #221C17; --sunk: #1D1813; --text: #F5EFE4; --text-2: #DDD4C7; --muted: #ABA196; --line: rgba(245, 239, 228, .14);
+  --chilli: #F06A4A; --link: #F4876A; --on-chilli: #17130F;
+  --band: #221C17; --on-band: #F5EFE4; --on-band-soft: #CFC6BA; --band-accent: #F06A4A;
+  --tint: #3A2219; --tint-ink: #F6C3B2; --logo: #F5EFE4;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 24px 50px -28px rgba(0, 0, 0, .8);
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: var(--step-0); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: var(--step-0); line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 img, svg { max-width: 100%; }
 img { display: block; height: auto; }
 a { color: var(--link); text-underline-offset: 3px; text-decoration-thickness: 1px; }
 a:hover { text-decoration-thickness: 2px; }
-:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.06; letter-spacing: -0.015em; text-wrap: balance; margin: 0; color: var(--head); }
-h1 { font-size: var(--step-4); }
-h2 { font-size: var(--step-3); }
-h3 { font-size: var(--step-1); font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; color: var(--text); }
+:focus-visible { outline: 3px solid var(--chilli); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3 { font-family: var(--font); font-weight: 900; line-height: 0.95; letter-spacing: -0.045em; text-wrap: balance; margin: 0; color: var(--text); }
+h1 { font-size: var(--step-3); }
+h2 { font-size: var(--step-2); }
+h3 { font-size: var(--step-1); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
 p { margin: 0; text-wrap: pretty; }
-.nowrap { white-space: nowrap; }
-.wrap { max-width: 77.5rem; margin: 0 auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
-@media (min-width: 760px) { .wrap { padding-left: max(40px, var(--gutter-l)); padding-right: max(40px, var(--gutter-r)); } }
-.read { max-width: 44rem; }
-.wrap.read { max-width: 77.5rem; }
-.wrap.read > * { max-width: 44rem; }
+.wrap { max-width: 1440px; margin: 0 auto; padding-left: max(var(--gut), env(safe-area-inset-left, 0px)); padding-right: max(var(--gut), env(safe-area-inset-right, 0px)); }
+.read { max-width: 46rem; }
+.wrap.read { max-width: 1440px; }
+.wrap.read > * { max-width: 46rem; }
 .skip { position: absolute; left: -999px; top: 8px; background: var(--surface); color: var(--text); padding: 10px 14px; border-radius: 8px; z-index: 20; }
 .skip:focus { left: 16px; }
+.lg-s, .logo .steam { fill: var(--chilli); }
 
-/* header: a quiet bar, the lock-up on the left */
-.site-head { background: var(--bg); }
-.site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px 20px; padding-block: 14px; flex-wrap: wrap; }
+/* header: the lock-up, Support, and the one action */
+.site-head { background: var(--bg); color: var(--logo); }
+.site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px 20px; min-height: 76px; }
 .brand { display: inline-flex; align-items: center; min-height: 44px; color: var(--logo); }
 .brand .logo { height: 28px; width: auto; display: block; }
-@media (min-width: 760px) { .site-head .wrap { padding-block: 22px; } .brand .logo { height: 32px; } }
-.logo .steam { fill: var(--accent); }
-.nav { display: flex; gap: 2px; flex-wrap: wrap; margin-right: -10px; }
-.nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px; color: var(--text); text-decoration: none; font-weight: 500; font-size: var(--step--1); }
+.nav { display: flex; align-items: center; gap: 4px 14px; }
+.nav a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text); text-decoration: none; font-weight: 600; font-size: var(--step--1); }
 .nav a:hover { text-decoration: underline; text-underline-offset: 6px; }
-.nav a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; text-decoration-color: var(--accent); text-underline-offset: 6px; }
-@media (max-width: 440px) { .nav a[href$="#next"] { display: none; } .nav a { padding: 0 8px; } }
-@media (max-width: 380px) { .site-head .wrap { gap: 8px 12px; } .brand .logo { height: 24px; } .nav { margin-right: -6px; } .nav a { padding: 0 6px; font-size: 0.875rem; } }
+.nav a[aria-current="page"] { text-decoration: underline; text-decoration-color: var(--chilli); text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.cta { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: 999px; background: var(--chilli); color: var(--on-chilli); font: 700 1rem var(--font); text-decoration: none; white-space: nowrap; transition: transform 160ms var(--ease); }
+.cta:hover { text-decoration: none; }
+.cta:active { transform: scale(0.97); }
+.cta svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.nav .cta { min-height: 44px; padding: 0 18px; font-size: 0.9375rem; color: var(--on-chilli); }
+.nav .cta:hover { text-decoration: none; }
+@media (max-width: 420px) { .nav .support { display: none; } .brand .logo { height: 24px; } }
 
 .copyline { display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; }
-.addr { font-family: var(--font); font-weight: 700; user-select: all; overflow-wrap: anywhere; }
-.copy-btn { min-height: 44px; padding: 0 18px; border-radius: var(--r-md); border: 1px solid currentColor; background: transparent; color: inherit; font: inherit; font-weight: 600; font-size: var(--step--1); cursor: pointer; }
+.addr { font-weight: 700; user-select: all; overflow-wrap: anywhere; }
+.copy-btn { min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1.5px solid currentColor; background: transparent; color: inherit; font: inherit; font-weight: 600; font-size: var(--step--1); cursor: pointer; }
 .copy-btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
 
 /* reading pages */
-.page-head { padding-block: 56px 16px; }
-.page-head .wrap, .page-head .read { display: grid; gap: 14px; }
+.page-head { padding-block: 48px 16px; }
+.page-head .wrap, .page-head .read { display: grid; gap: 16px; }
 .page-head h1 { font-size: var(--step-3); }
 .page-head p { color: var(--muted); font-size: var(--step-1); line-height: 1.5; }
-.draft { display: inline-flex; align-self: start; justify-self: start; padding: 6px 12px; border-radius: var(--r-sm); background: var(--accent-tint); color: var(--accent-ink); font-weight: 600; font-size: var(--step--1); }
-.page-head .draft { font-size: var(--step--1); color: var(--accent-ink); line-height: 1.4; }
-.prose { padding-block: 16px 72px; }
+.draft { display: inline-flex; align-self: start; justify-self: start; padding: 6px 12px; border-radius: 999px; background: var(--tint); color: var(--tint-ink); font-weight: 600; font-size: var(--step--1); }
+.page-head .draft { font-size: var(--step--1); color: var(--tint-ink); line-height: 1.4; }
+.prose { padding-block: 16px 80px; }
 .prose .read { display: grid; gap: 16px; }
-.prose h2 { font-size: var(--step-2); margin-top: 20px; }
+.prose h2 { font-size: var(--step-2); margin-top: 24px; }
 .prose ul, .prose ol { margin: 0; padding-left: 1.25rem; display: grid; gap: 6px; }
 .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
 table { border-collapse: collapse; width: 100%; font-size: var(--step--1); }
@@ -124,32 +114,30 @@ th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--li
 th { font-weight: 700; background: var(--sunk); color: var(--text); }
 tr:last-child td { border-bottom: 0; }
 .facts { display: grid; gap: 4px; padding: 16px 18px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
-
-details { border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface); transition: border-color .15s; }
-details[open] { border-color: color-mix(in srgb, var(--text) 22%, var(--line)); }
-summary { cursor: pointer; list-style: none; min-height: 44px; padding: 18px 56px 18px 22px; font-weight: 600; font-size: 1.0625rem; position: relative; }
+details { border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); transition: border-color .15s; }
+details[open] { border-color: color-mix(in srgb, var(--text) 26%, transparent); }
+summary { cursor: pointer; list-style: none; min-height: 44px; padding: 18px 56px 18px 22px; font-weight: 700; font-size: 1.0625rem; position: relative; }
 summary::-webkit-details-marker { display: none; }
-summary::after { content: "+"; position: absolute; right: 22px; top: 50%; transform: translateY(-50%); font-weight: 500; font-size: 1.4rem; color: var(--muted); }
+summary::after { content: "+"; position: absolute; right: 22px; top: 50%; transform: translateY(-50%); font-weight: 500; font-size: 1.4rem; color: var(--chilli); }
 details[open] summary::after { content: "\2212"; }
 details > div { padding: 0 22px 20px; display: grid; gap: 10px; color: var(--text); }
 details > div p { color: var(--muted); }
 .faq { display: grid; gap: 10px; }
 
-/* footer: potjie black on every page */
-.site-foot { background: #1C1917; color: #CFC8BE; padding-block: 44px 52px; font-size: var(--step--1); border-top: 1px solid rgba(248, 246, 241, .08); }
+/* footer: near-black on every page */
+.site-foot { background: #17130F; color: #CFC6BA; padding-block: 44px 52px; font-size: var(--step--1); border-top: 1px solid rgba(245, 239, 228, .08); }
 .site-foot .wrap { display: grid; gap: 16px; }
 .foot-links { display: flex; flex-wrap: wrap; gap: 4px; margin: 0 -10px; }
-.foot-links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px; color: #F8F6F1; font-weight: 600; text-decoration: none; }
+.foot-links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px; color: #F5EFE4; font-weight: 600; text-decoration: none; }
 .foot-links a:hover { text-decoration: underline; }
-.site-foot a { color: #F8F6F1; }
+.site-foot a { color: #F5EFE4; }
 .legal-line { max-width: 52rem; }
-@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
-
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the content</a><header class="site-head"><div class="wrap"><a class="brand" href="index.html" aria-label="DalaDish home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="20.00 77.12 1795.11 358.08" class="logo" role="img" aria-label="DalaDish" focusable="false"><g><path fill="currentColor" d="M44 228H468Q469.58 228 471.12 228.31Q472.67 228.61 474.12 229.22Q475.58 229.82 476.89 230.7Q478.2 231.57 479.31 232.69Q480.43 233.8 481.3 235.11Q482.18 236.42 482.78 237.88Q483.39 239.33 483.69 240.88Q484 242.42 484 244Q484 245.58 483.69 247.12Q483.39 248.67 482.78 250.12Q482.18 251.58 481.3 252.89Q480.43 254.2 479.31 255.31Q478.2 256.43 476.89 257.3Q475.58 258.18 474.12 258.78Q472.67 259.39 471.12 259.69Q469.58 260 468 260H455.1C447.4 317.53 382.61 395.97 256 388.8C129.39 395.97 64.6 317.53 56.9 260H44Q42.42 260 40.88 259.69Q39.33 259.39 37.88 258.78Q36.42 258.18 35.11 257.3Q33.8 256.43 32.69 255.31Q31.57 254.2 30.7 252.89Q29.82 251.58 29.22 250.12Q28.61 248.67 28.31 247.12Q28 245.58 28 244Q28 242.42 28.31 240.88Q28.61 239.33 29.22 237.88Q29.82 236.42 30.7 235.11Q31.57 233.8 32.69 232.69Q33.8 231.57 35.11 230.7Q36.42 229.82 37.88 229.22Q39.33 228.61 40.88 228.31Q42.42 228 44 228Z"/><path fill="currentColor" d="M193.6 398.4H318.4C322.38 398.4 325.6 401.62 325.6 405.6V420C325.6 423.98 322.38 427.2 318.4 427.2H193.6C189.62 427.2 186.4 423.98 186.4 420V405.6C186.4 401.62 189.62 398.4 193.6 398.4Z"/><path class="steam" d="M242.96 101.12Q242.96 114.34 234.1 129.9Q229.56 137.89 218.15 153.2Q207.92 166.93 204.35 173.2Q199.68 181.41 199.68 186.16Q199.68 187.74 199.37 189.28Q199.07 190.83 198.46 192.28Q197.86 193.74 196.98 195.05Q196.11 196.36 194.99 197.47Q193.88 198.59 192.57 199.46Q191.26 200.34 189.8 200.94Q188.35 201.55 186.8 201.85Q185.26 202.16 183.68 202.16Q182.1 202.16 180.56 201.85Q179.01 201.55 177.56 200.94Q176.1 200.34 174.79 199.46Q173.48 198.59 172.37 197.47Q171.25 196.36 170.38 195.05Q169.5 193.74 168.9 192.28Q168.29 190.83 167.99 189.28Q167.68 187.74 167.68 186.16Q167.68 172.94 176.54 157.38Q181.08 149.39 192.49 134.08Q202.72 120.35 206.29 114.08Q210.96 105.87 210.96 101.12Q210.96 99.54 211.27 98Q211.57 96.45 212.18 95Q212.78 93.54 213.66 92.23Q214.53 90.92 215.65 89.81Q216.76 88.69 218.07 87.82Q219.38 86.94 220.84 86.34Q222.29 85.73 223.84 85.43Q225.38 85.12 226.96 85.12Q228.54 85.12 230.08 85.43Q231.63 85.73 233.08 86.34Q234.54 86.94 235.85 87.82Q237.16 88.69 238.27 89.81Q239.39 90.92 240.26 92.23Q241.14 93.54 241.74 95Q242.35 96.45 242.65 98Q242.96 99.54 242.96 101.12ZM344.32 101.12Q344.32 114.34 335.46 129.9Q330.92 137.89 319.51 153.2Q309.28 166.93 305.71 173.2Q301.04 181.41 301.04 186.16Q301.04 187.74 300.73 189.28Q300.43 190.83 299.82 192.28Q299.22 193.74 298.34 195.05Q297.47 196.36 296.35 197.47Q295.24 198.59 293.93 199.46Q292.62 200.34 291.16 200.94Q289.71 201.55 288.16 201.85Q286.62 202.16 285.04 202.16Q283.46 202.16 281.92 201.85Q280.37 201.55 278.92 200.94Q277.46 200.34 276.15 199.46Q274.84 198.59 273.73 197.47Q272.61 196.36 271.74 195.05Q270.86 193.74 270.26 192.28Q269.65 190.83 269.35 189.28Q269.04 187.74 269.04 186.16Q269.04 172.94 277.9 157.38Q282.44 149.39 293.85 134.08Q304.08 120.35 307.65 114.08Q312.32 105.87 312.32 101.12Q312.32 99.54 312.63 98Q312.93 96.45 313.54 95Q314.14 93.54 315.02 92.23Q315.89 90.92 317.01 89.81Q318.12 88.69 319.43 87.82Q320.74 86.94 322.2 86.34Q323.65 85.73 325.2 85.43Q326.74 85.12 328.32 85.12Q329.9 85.12 331.44 85.43Q332.99 85.73 334.44 86.34Q335.9 86.94 337.21 87.82Q338.52 88.69 339.63 89.81Q340.75 90.92 341.62 92.23Q342.5 93.54 343.1 95Q343.71 96.45 344.01 98Q344.32 99.54 344.32 101.12Z"/></g><path fill="currentColor" transform="translate(549.19 388.80)" d="M18.16 0V-209.2H110.99Q149.2 -209.2 173.32 -197.07Q197.44 -184.94 208.84 -161.62Q220.25 -138.31 220.25 -104.6Q220.25 -70.9 208.84 -47.58Q197.44 -24.26 173.32 -12.13Q149.2 0 110.99 0ZM656.44 0V-209.2H749.28Q787.49 -209.2 811.6 -197.07Q835.72 -184.94 847.12 -161.62Q858.53 -138.31 858.53 -104.6Q858.53 -70.9 847.12 -47.58Q835.72 -24.26 811.6 -12.13Q787.49 0 749.28 0ZM446.84 0Q422.87 0 411.68 -10.31Q400.5 -20.63 400.5 -41.7V-209.2H458.61V-48.81Q458.61 -43.87 459.99 -42.28Q461.37 -40.68 465.87 -40.68H473.71Q473.63 -42.32 473.63 -44.02Q473.63 -63.05 484.6 -74.75Q495.56 -86.44 515.03 -91.82Q534.5 -97.19 560.21 -97.19H576.49V-101.55Q576.49 -114.48 572.35 -120.07Q568.2 -125.67 558.76 -125.67Q549.46 -125.67 544.74 -120.66Q540.02 -115.64 537.84 -105.33L480.75 -114.05Q483.94 -127.41 493.09 -138.09Q502.25 -148.77 519.03 -155.01Q535.81 -161.26 561.81 -161.26Q583.9 -161.26 600.17 -155.09Q616.44 -148.91 625.37 -133Q634.31 -117.1 634.31 -87.75V-48.81Q634.31 -43.87 635.69 -42.28Q637.07 -40.68 641.57 -40.68H647.24V0H622.54Q600.17 0 589.63 -10.39Q585.03 -14.93 582.44 -21.48Q579.75 -16.75 575.83 -12.28Q569.66 -5.23 559.2 -0.65Q548.74 3.92 532.61 3.92Q518.08 3.92 504.57 -0.73Q491.06 -5.38 482.34 -15.91Q477.63 -21.61 475.46 -29.37V0ZM1098.98 0V-209.2H1157.09V-131.91Q1164.34 -145.19 1175.03 -152.4Q1187.75 -160.97 1205.76 -160.97Q1225.23 -160.97 1236.63 -151.96Q1248.04 -142.96 1252.98 -127.56Q1257.92 -112.16 1257.92 -93.12V0H1199.95V-85.57Q1199.95 -104.31 1196.68 -111.43Q1193.41 -118.55 1183.24 -118.55Q1168.86 -118.55 1162.98 -106.85Q1157.09 -95.16 1157.09 -71.77V0ZM277.83 3.92Q263.3 3.92 249.79 -0.73Q236.28 -5.38 227.56 -15.91Q218.85 -26.44 218.85 -44.02Q218.85 -63.05 229.81 -74.75Q240.78 -86.44 260.25 -91.82Q279.72 -97.19 305.43 -97.19H321.7V-101.55Q321.7 -114.48 317.56 -120.07Q313.42 -125.67 303.98 -125.67Q294.68 -125.67 289.96 -120.66Q285.24 -115.64 283.06 -105.33L225.96 -114.05Q229.16 -127.41 238.31 -138.09Q247.47 -148.77 264.25 -155.01Q281.03 -161.26 307.03 -161.26Q329.11 -161.26 345.38 -155.09Q361.66 -148.91 370.59 -133Q379.53 -117.1 379.53 -87.75V-48.81Q379.53 -43.87 380.91 -42.28Q382.29 -40.68 386.79 -40.68H392.46V0H367.76Q345.38 0 334.85 -10.39Q330.25 -14.93 327.66 -21.48Q324.97 -16.75 321.05 -12.28Q314.88 -5.23 304.42 -0.65Q293.96 3.92 277.83 3.92ZM1013.65 4.07Q995.34 4.07 978.2 -0.73Q961.06 -5.52 949.14 -16.05Q937.23 -26.59 934.32 -44.02L984.74 -54.04Q985.9 -44.89 991.71 -39.95Q997.52 -35.01 1011.03 -35.01Q1023.82 -35.01 1028.68 -38.72Q1033.55 -42.42 1033.55 -46.93Q1033.55 -50.99 1029.19 -55.21Q1024.83 -59.42 1011.47 -61.02L1000.86 -62.33Q992 -63.49 981.47 -65.52Q970.93 -67.56 961.49 -72.06Q952.05 -76.56 946.02 -85.06Q939.99 -93.56 939.99 -107.51Q939.99 -123.2 948.49 -135.26Q956.99 -147.31 972.97 -154.14Q988.95 -160.97 1011.03 -160.97Q1029.19 -160.97 1045.32 -155.89Q1061.44 -150.8 1072.7 -140.63Q1083.96 -130.46 1087.16 -115.06L1037.76 -104.75Q1036.75 -108.52 1034.57 -112.74Q1032.39 -116.95 1027.59 -119.93Q1022.8 -122.91 1013.79 -122.91Q1004.49 -122.91 1000.35 -119.57Q996.21 -116.22 996.21 -111.87Q996.21 -107.07 1000.28 -104.31Q1004.35 -101.55 1010.67 -100.1Q1016.99 -98.65 1023.67 -97.77L1037.62 -96.03Q1050.26 -94.43 1062.24 -89.35Q1074.23 -84.26 1082 -74.38Q1089.77 -64.5 1089.77 -48.52Q1089.77 -30.94 1079.68 -19.25Q1069.58 -7.55 1052.29 -1.74Q1035 4.07 1013.65 4.07ZM868.46 0V-156.9H926.57V0ZM716.01 -50.85H742.88Q796.64 -50.85 796.64 -104.6Q796.64 -122.33 790.54 -134.24Q784.43 -146.15 772.52 -152.25Q760.61 -158.36 742.88 -158.36H716.01ZM77.73 -50.85H104.6Q158.36 -50.85 158.36 -104.6Q158.36 -122.33 152.25 -134.24Q146.15 -146.15 134.24 -152.25Q122.33 -158.36 104.6 -158.36H77.73ZM897.52 -169.69Q880.95 -169.69 871.66 -178.99Q862.36 -188.28 862.36 -204.85Q862.36 -221.41 871.66 -230.71Q880.95 -240 897.52 -240Q914.08 -240 923.38 -230.71Q932.67 -221.41 932.67 -204.85Q932.67 -188.28 923.38 -178.99Q914.08 -169.69 897.52 -169.69ZM550.48 -32.83Q559.2 -32.83 565.08 -36.54Q570.97 -40.24 574.02 -46.93Q577.07 -53.61 577.07 -62.47V-67.56H563.7Q551.21 -67.56 544.45 -64.29Q537.7 -61.02 535.15 -56.44Q532.61 -51.87 532.61 -47.65Q532.61 -45.62 533.7 -42.06Q534.79 -38.5 538.57 -35.67Q542.34 -32.83 550.48 -32.83ZM295.7 -32.83Q304.42 -32.83 310.3 -36.54Q316.18 -40.24 319.23 -46.93Q322.29 -53.61 322.29 -62.47V-67.56H308.92Q296.43 -67.56 289.67 -64.29Q282.91 -61.02 280.37 -56.44Q277.83 -51.87 277.83 -47.65Q277.83 -45.62 278.92 -42.06Q280.01 -38.5 283.79 -35.67Q287.56 -32.83 295.7 -32.83Z"/></svg>
-</a><nav class="nav" aria-label="Main"><a href="index.html#how">How it works</a><a href="index.html#next">What's next</a><a href="support.html">Support</a></nav></div></header><main id="main">
+</a><nav class="nav" aria-label="Main"><a class="support" href="support.html">Support</a><a class="cta" href="mailto:hello@daladish.co.za?subject=Early%20access%20to%20DalaDish">Get early access</a></nav></div></header><main id="main">
 <section class="page-head"><div class="wrap read"><h1>Terms of use</h1><p class="draft">Version 1.3, effective 27 October 2026. Changed from version 1.2: you confirm in the app that you are 18 or older when you agree (clause 2).</p>
 <p>The agreement between you and MFH Technologies (Pty) Ltd for using DalaDish during its private family test.</p></div></section>
 <section class="prose"><div class="wrap"><div class="read">
